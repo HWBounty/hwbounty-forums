@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/hwbounty/static/css/main.8c8b27cf.chunk.css",
+    "main.js": "/hwbounty/static/js/main.86821ab8.chunk.js",
+    "main.js.map": "/hwbounty/static/js/main.86821ab8.chunk.js.map",
+    "runtime-main.js": "/hwbounty/static/js/runtime-main.c0e150e9.js",
+    "runtime-main.js.map": "/hwbounty/static/js/runtime-main.c0e150e9.js.map",
+    "static/js/2.a3858cb8.chunk.js": "/hwbounty/static/js/2.a3858cb8.chunk.js",
+    "static/js/2.a3858cb8.chunk.js.map": "/hwbounty/static/js/2.a3858cb8.chunk.js.map",
+    "static/js/3.d79d04f5.chunk.js": "/hwbounty/static/js/3.d79d04f5.chunk.js",
+    "static/js/3.d79d04f5.chunk.js.map": "/hwbounty/static/js/3.d79d04f5.chunk.js.map",
+    "index.html": "/hwbounty/index.html",
+    "static/css/main.8c8b27cf.chunk.css.map": "/hwbounty/static/css/main.8c8b27cf.chunk.css.map",
+    "static/js/2.a3858cb8.chunk.js.LICENSE.txt": "/hwbounty/static/js/2.a3858cb8.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/hwbounty/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c0e150e9.js",
+    "static/js/2.a3858cb8.chunk.js",
+    "static/css/main.8c8b27cf.chunk.css",
+    "static/js/main.86821ab8.chunk.js"
+  ]
+}
