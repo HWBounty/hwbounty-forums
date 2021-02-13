@@ -22,6 +22,9 @@ import HWBountyLogo from "../../images/HWBounty-Logo.png";
 
 const styles = {
   ...theme.spreadIt,
+  searchbar: {
+    color: "white",
+  },
   root: {},
   button: {
     ...theme.button,
@@ -30,6 +33,7 @@ const styles = {
   },
   navBar: {
     backgroundColor: theme.palette.primary.main,
+    overflowY: "hidden",
   },
   logo: {
     objectFit: "fill",
@@ -59,7 +63,7 @@ export class Navbar extends Component {
     return (
       <div className={classes.root}>
         <div className={classes.navBar}>
-          <Grid container justify="center" spacing={0}>
+          <Grid container justify="left" spacing={0}>
             <Grid item xs={0}>
               <Button href="/" className={classes.button}>
                 Home
@@ -75,15 +79,17 @@ export class Navbar extends Component {
                 Sign Up
               </Button>
             </Grid>
-            <InputBase
-              className={classes.searchbar}
-              color="secondary"
-              placeholder="Search"
-              inputProps={{ 'aria-label': 'Seach HWBounty!' }}
-            />
-            <IconButton type="submit" aria-label="search" color="inherit">
-              <SearchIcon color="inherit" />
-            </IconButton>
+            </Grid>
+            <Grid container justify="right" spacing={0}>
+              <InputBase
+                className={classes.searchbar}
+                color="secondary"
+                placeholder="Search"
+                inputProps={{ 'aria-label': 'Seach HWBounty!' }}
+              />
+              <IconButton type="submit" aria-label="search" color="primary">
+                <SearchIcon color="inherit" />
+              </IconButton>
             </Grid>
         </div>
       </div>
