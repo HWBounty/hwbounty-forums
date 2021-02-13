@@ -2,7 +2,8 @@
 import React, { Component } from "react";
 
 // Styling
-import { Button, TextField } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 import PropTypes from "prop-types";
 
 // Redux

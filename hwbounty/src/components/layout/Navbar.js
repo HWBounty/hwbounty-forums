@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
+import InputBase from '@material-ui/core/InputBase';
+import IconButton from '@material-ui/core/IconButton';
+import SearchIcon from '@material-ui/icons/Search';
 
 class Navbar extends Component {
   render() {
@@ -26,6 +29,17 @@ class Navbar extends Component {
             <Button color="inherit" component={Link} to="/signup">
               Signup
             </Button>
+            <div className="search-area">
+              <InputBase
+                className="searchbar"
+                color="secondary"
+                placeholder="Search"
+                inputProps={{ 'aria-label': 'Seach HWBounty!' }}
+              />
+              <IconButton type="submit" aria-label="search" color="inherit">
+                <SearchIcon color="inherit" />
+              </IconButton>
+            </div>
           </div>
         </Toolbar>
       </AppBar>

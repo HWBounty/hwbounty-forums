@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 // Redux
 import { connect } from "react-redux";
 
-export class home extends Component {
+export class Home extends Component {
   render() {
     return (
       <Grid>
@@ -18,4 +18,4 @@ export class home extends Component {
   }
 }
 
-export default home;
+export default Home;

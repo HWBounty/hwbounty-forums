@@ -13,7 +13,7 @@ import themeFile from "./util/theme";
 import Navbar from "./components/layout/Navbar";
 
 // Pages
-import home from "./pages/home";
+import Home from "./pages/home";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
 import PageNotFound from "./pages/pagenotfound";
@@ -29,7 +29,7 @@ class App extends Component {
         <Router>
           <Navbar />
           <Switch>
-            <Route exact path="/" component={home} />
+            <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="*" component={PageNotFound} />
