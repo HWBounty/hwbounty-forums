@@ -16,11 +16,22 @@ export class Signup extends Component {
                     <br /> <br />
                     <TextField id="outlined-basic" label="Username" /> <br /> 
                     <TextField id="outlined-basic" label="Email" /> <br /> 
-                    <TextField id="outlined-basic" label="Password" type="password" />
-                    <TextField id="outlined-basic" label="Confirm Password" type="password" /> <br /> 
-                    <Button variant="contained" color="primary"> Login </Button> <br /> <br />
+                    <TextField
+                        id="outlined-basic"
+                        label="Password"
+                        type="password"
+                        onChange={this.handleChange}
+                    />
+                    <TextField
+                        id="outlined-basic"
+                        label="Confirm Password"
+                        type="password"
+                        onChange={this.handleConfirmChange}
+                    />
+                    <br /> 
+                    <Button variant="contained" color="primary"> Sign up </Button> <br /> <br />
 
-                    <Button variant="outlined">Log in with Google</Button>
+                    <Button variant="outlined">Sign up with Google</Button>
                 </header>
             </div>
         );
