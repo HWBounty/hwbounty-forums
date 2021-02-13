@@ -1,0 +1,146 @@
+// React
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import AppIcon from "../images/favicon.ico";
+import { Link, withRouter } from "react-router-dom";
+
+//MUI Stuff
+import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import { red } from '@material-ui/core/colors';
+import CommentIcon from '@material-ui/icons/Comment';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import LikeButton from '../components/bounty/LikeButton'
+import BountyReward from '../components/bounty/BountyReward'
+import Chip from '@material-ui/core/Chip';
+
+// Requests
+import axios from "axios";
+
+// Expanding labels
+import expandLabel from '../util/expandLabel'
+import { compactLabel } from '../util/expandLabel'
+
+const styles = (theme) => ({
+  ...theme.spreadIt,
+  root: {
+    maxWidth: 345,
+    textAlign: "left",
+  },
+  media: {
+    height: 0,
+    paddingTop: '56.25%', // 16:9
+  },
+  expand: {
+    transform: 'rotate(0deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest,
+    }),
+  },
+  expandOpen: {
+    transform: 'rotate(180deg)',
+  },
+  avatar: {
+    backgroundColor: red[500],
+  },
+});
+
+export class bountyview extends Component {
+  constructor() {
+    super();
+    this.state = {
+      bounty: 0,
+      claimed: true,
+      id: 0,
+      posterIcon: "",
+      posterName: "",
+      labels: [],
+      title: "",
+      text: "​",
+      comments: [],
+    };
+  }
+
+  componentDidMount = () => {
+    axios.get("/bounty/" + this.props.location.pathname.substring(this.props.location.pathname.lastIndexOf('/') + 1)).then((res_obj) => {
+        (res_obj.data ? this.setState({
+            id: res_obj.data.bountyID,
+            title: res_obj.data.title,
+            text: res_obj.data.description,
+            posterName: res_obj.data.author.publicID,
+            posterIcon: res_obj.data.author.pfp,
+            comments: [],
+            bounty: res_obj.data.points,
+            claimed: false,
+            labels: res_obj.data.tags.split(",").map((l, e) => {return expandLabel(l)}),
+        }) : this.props.history.push("/invalidbounty"))
+        this.setState({
+          errors: {
+            handle: res_obj.data.data
+              ? "The handle is either taken or too short"
+              : null,
+          },
+        });
+      });
+  };
+
+  render() {
+    const classes = this.props;
+    return (
+        <Card className={classes.root}>
+        <CardHeader
+          avatar={
+            <Avatar aria-label={this.state.posterName} src={this.state.posterIcon} />
+          }
+          action={
+            <IconButton aria-label="settings">
+              <MoreVertIcon />
+            </IconButton>
+          }
+          title={this.state.title}
+          subheader={"Posted by: " + this.state.posterName}
+        />
+        <CardContent>
+          {this.state.labels.length > 0 ? 
+            <span>
+                <span>
+                Topics:
+                </span> <br />
+                {this.state.labels.map((l, i) => {
+                    return (<Chip label={l[0]} style={l[1]} component="a" href={"/?t=" + compactLabel(l[0])} clickable />);
+                })} <br /> <br /> 
+            </span> 
+          : null}
+
+          <Typography variant="body2" color="textSecondary" component="p">
+            {this.state.text.split("\n").map((l, i) => {
+                return(
+                    <span id={i}>
+                        {l}
+                        <br />
+                    </span>
+                );
+            })}
+          </Typography>
+          <BountyReward pointReward={this.state.bounty} claimed={this.state.claimed} />
+        </CardContent>
+        <CardActions disableSpacing>
+            <LikeButton bountyId={this.state.id} />
+
+          <IconButton>
+            <CommentIcon />
+          </IconButton>
+        </CardActions>
+      </Card>
+    );
+  }
+}
+
+export default withRouter(withStyles(styles)(bountyview));
