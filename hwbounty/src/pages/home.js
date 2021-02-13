@@ -8,7 +8,7 @@ import Profile from "../components/profile/Profile";
 import BountySkeleton from "../util/BountySkeleton";
 
 import { connect } from "react-redux";
-import { getBounties } from "../redux/actions/dataActions";
+import { getBounties, getFakeBounties } from "../redux/actions/dataActions";
 
 export class home extends Component {
   state = {
@@ -16,7 +16,7 @@ export class home extends Component {
   };
 
   componentDidMount() {
-    this.props.getBounties();
+    this.props.getFakeBounties();
   }
   render() {
     const { bounties, loading } = this.props.data;
@@ -40,6 +40,7 @@ export class home extends Component {
 
 home.propTypes = {
   getBounties: PropTypes.func.isRequired,
+  getFakeBounties: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,
 };
 
@@ -47,4 +48,4 @@ const mapStateToProps = (state) => ({
   data: state.data,
 });
 
-export default connect(mapStateToProps, { getBounties })(home);
+export default connect(mapStateToProps, { getBounties, getFakeBounties })(home);

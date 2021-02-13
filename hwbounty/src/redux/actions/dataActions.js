@@ -33,6 +33,24 @@ export const getBounties = () => (dispatch) => {
     });
 };
 
+export const getFakeBounties = () => (dispatch) => {
+  dispatch({ type: LOADING_DATA });
+  axios
+    .get("/fakebounties")
+    .then((res) => {
+      dispatch({
+        type: SET_BOUNTIES,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: SET_BOUNTIES,
+        payload: [],
+      });
+    });
+};
+
 export const getBounty = (bountyId) => (dispatch) => {
   dispatch({ type: LOADING_UI });
   axios
