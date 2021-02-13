@@ -114,11 +114,7 @@ export class Navbar extends Component {
               >
                 HW
               </Typography>
-              <Typography
-                variant="h3"
-                color="textPrimary"
-                className={classes.logoText}
-              >
+              <Typography variant="h3" className={classes.logoText}>
                 Bounty
               </Typography>
             </Button>
@@ -138,7 +134,10 @@ export class Navbar extends Component {
                 onKeyDown={this.search}
               />
             </div>
-            <Button className={classes.button} href={authenticated ? "/" : "/login"}>
+            <Button
+              className={classes.button}
+              href={authenticated ? "/" : "/login"}
+            >
               {authenticated ? <img src={HWBountyLogo} /> : "Login"}
             </Button>
             {authenticated ? null : <Button className={classes.button} href="/signup">

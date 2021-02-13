@@ -1,28 +1,140 @@
-// React
 import React, { Component } from "react";
-
-// Styling
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
+import withStyles from "@material-ui/core/styles/withStyles";
 import PropTypes from "prop-types";
+import AppIcon from "../images/favicon.ico";
+import { Link } from "react-router-dom";
 
-// Redux
+//MUI Stuff
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import Card from "@material-ui/core/Card";
+import CircularProgress from "@material-ui/core/CircularProgress";
+
+// Redux stuff
 import { connect } from "react-redux";
+import { loginUser } from "../redux/actions/userActions";
 
-export class Login extends Component {
-    render() {
-        return (
-            <div className="App">
-                <header className="App-header">
-                    <TextField id="outlined-basic" label="Username" /> <br /> 
-                    <TextField id="outlined-basic" label="Password" type="password" /> <br /> 
-                    <Button variant="contained" color="primary"> Login </Button> <br /> <br />
+const styles = (theme) => ({
+  ...theme.spreadIt,
+});
 
-                    <Button variant="outlined">Log in with Google</Button>
-                </header>
-            </div>
-        );
+class login extends Component {
+  constructor() {
+    super();
+    this.state = {
+      email: "",
+      password: "",
+      errors: {},
+    };
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.UI.errors) {
+      this.setState({ errors: nextProps.UI.errors });
     }
+  }
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    const userData = {
+      email: this.state.email,
+      password: this.state.password,
+    };
+    this.props.loginUser(userData, this.props.history);
+  };
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
+  render() {
+    const {
+      classes,
+      UI: { loading },
+    } = this.props;
+    const { errors } = this.state;
+    return (
+      <Card className={classes.formCard}>
+        <Grid container className={classes.form}>
+          <Grid item xs={3} />
+          <Grid item sm>
+            <img src={AppIcon} alt="hwbounty logo" className={classes.image} />
+            <Typography variant="h2" className={classes.pageTitle}>
+              Login
+            </Typography>
+            <form noValidate onSubmit={this.handleSubmit}>
+              <TextField
+                id="email"
+                name="email"
+                type="email"
+                label="Email"
+                className={classes.textField}
+                helperText={errors.email}
+                error={errors.email ? true : false}
+                value={this.state.email}
+                onChange={this.handleChange}
+                fullWidth
+              />
+              <TextField
+                id="password"
+                name="password"
+                type="password"
+                label="Password"
+                className={classes.textField}
+                helperText={errors.password}
+                error={errors.password ? true : false}
+                value={this.state.password}
+                onChange={this.handleChange}
+                fullWidth
+              />
+              {errors.general && (
+                <Typography variant="body2" className={classes.customError}>
+                  {errors.general}
+                </Typography>
+              )}
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                className={classes.button}
+                disabled={loading}
+              >
+                Login
+                {loading && (
+                  <CircularProgress className={classes.progress} size={30} />
+                )}
+              </Button>
+              <br />
+              <small>
+                Don't have an account ? sign up <Link to="/signup">here</Link>
+              </small>
+            </form>
+          </Grid>
+          <Grid item xs={3} />
+        </Grid>
+      </Card>
+    );
+  }
 }
 
-export default Login;
+login.propTypes = {
+  classes: PropTypes.object.isRequired,
+  loginUser: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  UI: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  user: state.user,
+  UI: state.UI,
+});
+
+const mapActionsToProps = {
+  loginUser,
+};
+
+export default connect(
+  mapStateToProps,
+  mapActionsToProps
+)(withStyles(styles)(login));

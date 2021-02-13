@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 import Bounty from "../components/bounty/Bounty";
 import Profile from "../components/profile/Profile";
+import BountyFilter from "../components/layout/BountyFilter";
 
 import BountySkeleton from "../util/BountySkeleton";
 
@@ -26,7 +27,10 @@ export class home extends Component {
       <BountySkeleton />
     );
     return (
-      <Grid container spacing={10}>
+      <Grid container spacing={8}>
+        <Grid item sm={12} xs={12}>
+          <BountyFilter />
+        </Grid>
         <Grid item sm={8} xs={12}>
           {recentBountiesMarkup}
         </Grid>
