@@ -11,7 +11,11 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-// Redux stuff
+// Requests
+import axios from "axios";
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+
+// Redux
 import { connect } from "react-redux";
 import { signupUser } from "../redux/actions/userActions";
 
@@ -28,12 +32,8 @@ export class signup extends Component {
       confirmPassword: "",
       handle: "",
       errors: {},
+      userNameValidated: false,
     };
-  }
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.UI.errors) {
-      this.setState({ errors: nextProps.UI.errors });
-    }
   }
   handleSubmit = (event) => {
     event.preventDefault();
