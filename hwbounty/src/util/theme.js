@@ -4,7 +4,7 @@ const rawTheme = createMuiTheme({
   palette: {
     primary: {
       light: "#33c9dc",
-      main: "#00bcd4",
+      main: "#B8D8BA",
       dark: "#008394",
       contrastText: "#fff",
     },

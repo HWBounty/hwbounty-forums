@@ -27,7 +27,9 @@ class App extends Component {
     return (
       <MuiThemeProvider theme={null}>
         <Router>
-          <Navbar />
+          <div>
+            <Navbar />
+          </div>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
