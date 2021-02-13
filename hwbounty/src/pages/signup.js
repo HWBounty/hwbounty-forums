@@ -23,12 +23,11 @@ export class Signup extends Component {
 
     
     validateUsername = (e) => {
-        axios.get("https://api.hwbounty.help/usernametaken/" + e.target.value)
+        axios.get("https://api.hwbounty.help/usernametaken/" + document.getElementById("Username").value)
             .then(res_obj => {
                 console.log(res_obj);
                 this.setState({ userNameValidated: (res_obj.status == 200 ? !res_obj.data : false) });
             })
-            .then(console.log(this.state))
     }
 
     render() {
@@ -36,7 +35,7 @@ export class Signup extends Component {
             <div className="App">
                 <header className="App-header">
                     <br /> <br />
-                    <TextField id="outlined-basic" label="Username" error={!this.state.userNameValidated} helperText={(!this.state.userNameValidated ? "The username is too short/taken" : "")}/> <br /> 
+                    <TextField id="Username" label="Username" error={!this.state.userNameValidated} helperText={(!this.state.userNameValidated ? "The username is too short/taken" : "")}/> <br /> 
                     <TextField id="outlined-basic" label="Email" /> <br /> 
                     <TextField
                         id="outlined-basic"
@@ -51,9 +50,9 @@ export class Signup extends Component {
                         onChange={this.handleConfirmChange}
                     />
                     <br /> 
-                    <Button variant="contained" color="primary"> Sign up </Button> <br /> <br />
+                    <Button variant="contained" color="primary" onClick={this.validateUsername}> Sign up </Button> <br /> <br />
 
-                    <Button variant="outlined" onClick={this.validateUsername}>Sign up with Google</Button>
+                    <Button variant="outlined">Sign up with Google</Button>
                 </header>
             </div>
         );
