@@ -140,6 +140,9 @@ export class Navbar extends Component {
             >
               {authenticated ? <img src={HWBountyLogo} /> : "Login"}
             </Button>
+            {authenticated ? null : <Button className={classes.button} href="/signup">
+              Signup
+            </Button>}
           </Toolbar>
         </AppBar>
       </div>
