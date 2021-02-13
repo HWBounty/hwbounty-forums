@@ -21,7 +21,6 @@ import SearchIcon from "@material-ui/icons/Search";
 
 // Images
 import HWBountyLogo from "../../images/HWBounty-Logo.png";
-import NoImg from "../../images/no-img.png";
 
 const styles = {
   ...theme.spreadIt,
@@ -101,7 +100,7 @@ export class Navbar extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, authenticated } = this.props;
     return (
       <div className={classes.root}>
         <AppBar position="static">
@@ -139,8 +138,8 @@ export class Navbar extends Component {
                 onKeyDown={this.search}
               />
             </div>
-            <Button>
-              <img src={NoImg} className={classes.profileImage} />
+            <Button className={classes.button}>
+              {authenticated ? <img src={HWBountyLogo} /> : "Login"}
             </Button>
           </Toolbar>
         </AppBar>
