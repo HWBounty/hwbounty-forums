@@ -35,8 +35,10 @@ const rawTheme = createMuiTheme({
       textAlign: "center",
     },
     formCard: {
-      transformOrigin: "center",
-      margin: "auto 450px 450px 450px",
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
     },
     image: {
       margin: "20px auto 20px auto",
