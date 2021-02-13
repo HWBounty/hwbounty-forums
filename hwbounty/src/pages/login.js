@@ -6,11 +6,9 @@ import { Button, TextField } from "@material-ui/core";
 import PropTypes from "prop-types";
 
 // Redux
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-
-
-export class login extends Component {
+export class Login extends Component {
     render() {
         return (
             <div className="App">
@@ -26,4 +24,4 @@ export class login extends Component {
     }
 }
 
-export default login;
+export default Login;
