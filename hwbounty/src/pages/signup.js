@@ -32,7 +32,6 @@ export class signup extends Component {
       confirmPassword: "",
       handle: "",
       errors: {},
-      userNameValidated: false,
     };
   }
   handleSubmit = (event) => {
@@ -53,6 +52,14 @@ export class signup extends Component {
       [event.target.name]: event.target.value,
     });
   };
+  validateUsername = (e) => {
+    axios.get("https://api.hwbounty.help/usernametaken/" + this.state.handle)
+      .then(res_obj => {
+      console.log(res_obj);
+      this.setState( { errors: { handle: ((res_obj.data ? "The handle is either taken or too short" : null)) } });
+    })
+  }
+
   render() {
     const {
       classes,
@@ -127,6 +134,7 @@ export class signup extends Component {
               color="primary"
               className={classes.button}
               disabled={loading}
+              onClick={this.validateUsername}
             >
               Signup
               {loading && (

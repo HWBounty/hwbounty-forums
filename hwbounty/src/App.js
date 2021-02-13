@@ -28,7 +28,7 @@ import axios from "axios";
 
 const theme = createMuiTheme(themeFile);
 
-axios.defaults.baseURL = "https://us-central1-hwbounty.cloudfunctions.net/api";
+axios.defaults.baseURL = "https://api.hwbounty.help";
 
 class App extends Component {
   render() {
