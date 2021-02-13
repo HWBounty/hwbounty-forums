@@ -96,7 +96,7 @@ export class Navbar extends Component {
   search = (e) => {
     if (e.key == "Enter") {
       console.log("piss");
-      this.props.history.push("/search/?q=" + e.target.value);
+      this.props.history.push("?q=" + e.target.value);
     }
   };
 
