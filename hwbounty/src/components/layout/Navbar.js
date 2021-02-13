@@ -138,7 +138,7 @@ export class Navbar extends Component {
                 onKeyDown={this.search}
               />
             </div>
-            <Button className={classes.button}>
+            <Button className={classes.button} href={authenticated ? "/" : "/login"}>
               {authenticated ? <img src={HWBountyLogo} /> : "Login"}
             </Button>
           </Toolbar>
