@@ -9,6 +9,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import Card from "@material-ui/core/Card";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 // Redux stuff
@@ -54,63 +55,65 @@ class login extends Component {
     } = this.props;
     const { errors } = this.state;
     return (
-      <Grid container className={classes.form}>
-        <Grid item sm />
-        <Grid item sm>
-          <img src={AppIcon} alt="hwbounty logo" className={classes.image} />
-          <Typography variant="h2" className={classes.pageTitle}>
-            Login
-          </Typography>
-          <form noValidate onSubmit={this.handleSubmit}>
-            <TextField
-              id="email"
-              name="email"
-              type="email"
-              label="Email"
-              className={classes.textField}
-              helperText={errors.email}
-              error={errors.email ? true : false}
-              value={this.state.email}
-              onChange={this.handleChange}
-              fullWidth
-            />
-            <TextField
-              id="password"
-              name="password"
-              type="password"
-              label="Password"
-              className={classes.textField}
-              helperText={errors.password}
-              error={errors.password ? true : false}
-              value={this.state.password}
-              onChange={this.handleChange}
-              fullWidth
-            />
-            {errors.general && (
-              <Typography variant="body2" className={classes.customError}>
-                {errors.general}
-              </Typography>
-            )}
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              className={classes.button}
-              disabled={loading}
-            >
+      <Card className={classes.formCard}>
+        <Grid container className={classes.form}>
+          <Grid item xs={3} />
+          <Grid item sm>
+            <img src={AppIcon} alt="hwbounty logo" className={classes.image} />
+            <Typography variant="h2" className={classes.pageTitle}>
               Login
-              {loading && (
-                <CircularProgress className={classes.progress} size={30} />
+            </Typography>
+            <form noValidate onSubmit={this.handleSubmit}>
+              <TextField
+                id="email"
+                name="email"
+                type="email"
+                label="Email"
+                className={classes.textField}
+                helperText={errors.email}
+                error={errors.email ? true : false}
+                value={this.state.email}
+                onChange={this.handleChange}
+                fullWidth
+              />
+              <TextField
+                id="password"
+                name="password"
+                type="password"
+                label="Password"
+                className={classes.textField}
+                helperText={errors.password}
+                error={errors.password ? true : false}
+                value={this.state.password}
+                onChange={this.handleChange}
+                fullWidth
+              />
+              {errors.general && (
+                <Typography variant="body2" className={classes.customError}>
+                  {errors.general}
+                </Typography>
               )}
-            </Button>
-            <br />
-            <small>
-              Don't have an account ? sign up <Link to="/signup">here</Link>
-            </small>
-          </form>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                className={classes.button}
+                disabled={loading}
+              >
+                Login
+                {loading && (
+                  <CircularProgress className={classes.progress} size={30} />
+                )}
+              </Button>
+              <br />
+              <small>
+                Don't have an account ? sign up <Link to="/signup">here</Link>
+              </small>
+            </form>
+          </Grid>
+          <Grid item xs={3} />
         </Grid>
-        <Grid item sm />
-      </Grid>
+      </Card>
     );
   }
 }

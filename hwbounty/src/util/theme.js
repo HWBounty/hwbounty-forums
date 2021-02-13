@@ -34,14 +34,18 @@ const rawTheme = createMuiTheme({
     form: {
       textAlign: "center",
     },
+    formCard: {
+      transformOrigin: "center",
+      margin: "auto 450px 450px 450px",
+    },
     image: {
       margin: "20px auto 20px auto",
     },
     pageTitle: {
-      margin: "10px auto 10px auto",
+      margin: "15px auto 15px auto",
     },
     textField: {
-      margin: "10px auto 10px auto",
+      margin: "15px auto 15px auto",
     },
     button: {
       marginTop: 20,

@@ -33,23 +33,25 @@ axios.defaults.baseURL = "https://api.hwbounty.help";
 class App extends Component {
   render() {
     return (
-      <MuiThemeProvider theme={theme}>
-        <Provider store={store}>
-          <Router>
-            <div>
-              <Navbar />
-            </div>
-            <div className="container">
-              <Switch>
-                <Route exact path="/" component={Home} />
-                <Route path="/login" component={Login} />
-                <Route path="/signup" component={Signup} />
-                <Route path="*" component={PageNotFound} />
-              </Switch>
-            </div>
-          </Router>
-        </Provider>
-      </MuiThemeProvider>
+      <div className="main-background" style={{ backgroundColor: "#DAE0E6" }}>
+        <MuiThemeProvider theme={theme}>
+          <Provider store={store}>
+            <Router>
+              <div>
+                <Navbar />
+              </div>
+              <div className="container">
+                <Switch>
+                  <Route exact path="/" component={Home} />
+                  <Route path="/login" component={Login} />
+                  <Route path="/signup" component={Signup} />
+                  <Route path="*" component={PageNotFound} />
+                </Switch>
+              </div>
+            </Router>
+          </Provider>
+        </MuiThemeProvider>
+      </div>
     );
   }
 }
