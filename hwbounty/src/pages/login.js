@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 
 // Styling
-import Grid from "@material-ui/core/Grid";
+import { Button, TextField } from "@material-ui/core";
 import PropTypes from "prop-types";
 
 // Redux
@@ -13,9 +13,15 @@ import { connect } from 'react-redux';
 export class login extends Component {
     render() {
         return (
-            <Grid>
-                <p>Hello boys!</p>
-            </Grid>
+            <div className="App">
+                <header className="App-header">
+                    <TextField id="outlined-basic" label="Username" /> <br /> 
+                    <TextField id="outlined-basic" label="Password" type="password" /> <br /> 
+                    <Button variant="contained" color="primary"> Login </Button> <br /> <br />
+
+                    <Button variant="outlined">Log in with Google</Button>
+                </header>
+            </div>
         );
     }
 }
