@@ -1,5 +1,5 @@
+// React
 import React, { Component } from "react";
-import withStyles from "@material-ui/core/styles/withStyles";
 import PropTypes from "prop-types";
 import AppIcon from "../images/favicon.ico";
 import { Link } from "react-router-dom";
@@ -10,10 +10,10 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import withStyles from "@material-ui/core/styles/withStyles";
 
 // Requests
 import axios from "axios";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 
 // Redux
 import { connect } from "react-redux";
@@ -53,12 +53,17 @@ export class signup extends Component {
     });
   };
   validateUsername = (e) => {
-    axios.get("https://api.hwbounty.help/usernametaken/" + this.state.handle)
-      .then(res_obj => {
+    axios.get("/usernametaken/" + this.state.handle).then((res_obj) => {
       console.log(res_obj);
-      this.setState( { errors: { handle: ((res_obj.data ? "The handle is either taken or too short" : null)) } });
-    })
-  }
+      this.setState({
+        errors: {
+          handle: res_obj.data
+            ? "The handle is either taken or too short"
+            : null,
+        },
+      });
+    });
+  };
 
   render() {
     const {
