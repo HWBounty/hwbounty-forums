@@ -1,16 +1,12 @@
-// React
 import React, { Component } from "react";
-
-// Styling
 import Grid from "@material-ui/core/Grid";
 import PropTypes from "prop-types";
 
-// Components
 import Bounty from "../components/bounty/Bounty";
 import Profile from "../components/profile/Profile";
+
 import BountySkeleton from "../util/BountySkeleton";
 
-// Redux
 import { connect } from "react-redux";
 import { getBounties } from "../redux/actions/dataActions";
 
