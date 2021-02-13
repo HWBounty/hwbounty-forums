@@ -36,6 +36,8 @@ export class signup extends Component {
       password: "",
       confirmPassword: "",
       username: "",
+      firstName: "",
+      lastName: "",
       errors: {},
       userConfirmedEmail: false,
     };
@@ -50,6 +52,8 @@ export class signup extends Component {
       password: this.state.password,
       confirmPassword: this.state.confirmPassword,
       username: this.state.username,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
     };
     this.props.signupUser(newUserData, this.props.history);
   };
@@ -120,6 +124,14 @@ export class signup extends Component {
                       Next
                     </Button>
                   </form>
+
+                  <Button variant="contained" className={classes.button}>
+                    Sign in with Discord
+                  </Button>
+                  <br />
+                  <Button variant="contained" className={classes.button}>
+                    Sign in with Google
+                  </Button>
                 </Fragment>
               ) : (
                 <Fragment>
@@ -135,6 +147,30 @@ export class signup extends Component {
                       disabled={true}
                     />
                     <TextField
+                      id="firstName"
+                      name="firstName"
+                      type="text"
+                      label="First Name"
+                      className={classes.textField}
+                      error={errors.handle ? true : false}
+                      value={this.state.firstName}
+                      value={this.state.handle}
+                      onChange={this.handleChange}
+                      fullWidth
+                    />
+                    <TextField
+                      id="lastName"
+                      name="lastName"
+                      type="text"
+                      label="Last Name"
+                      className={classes.textField}
+                      error={errors.handle ? true : false}
+                      value={this.state.lastName}
+                      value={this.state.handle}
+                      onChange={this.handleChange}
+                      fullWidth
+                    />
+                    <TextField
                       id="username"
                       name="username"
                       type="text"
@@ -142,7 +178,7 @@ export class signup extends Component {
                       className={classes.textField}
                       helperText={errors.handle}
                       error={errors.handle ? true : false}
-                      value={this.state.handle}
+                      value={this.state.username}
                       onChange={this.handleChange}
                       fullWidth
                     />
@@ -193,15 +229,6 @@ export class signup extends Component {
                   {errors.general}
                 </Typography>
               )}
-              <Grid>
-                <Button variant="contained" className={classes.button}>
-                  Sign in with Discord
-                </Button>
-                <br />
-                <Button variant="contained" className={classes.button}>
-                  Sign in with Google
-                </Button>
-              </Grid>
               <br />
               <small>
                 Already have an account ? login <Link to="/login">here</Link>
