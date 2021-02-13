@@ -1,4 +1,4 @@
-import './App.css';
+import "./App.css";
 
 // React
 import React, { Component } from "react";
@@ -9,9 +9,12 @@ import { MuiThemeProvider } from "@material-ui/core/styles";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import themeFile from "./util/theme";
 
+// Components
+import Navbar from "./components/layout/Navbar";
+
 // Pages
-import home from './pages/home';
-import login from './pages/login';
+import home from "./pages/home";
+import login from "./pages/login";
 
 import axios from "axios";
 
@@ -22,8 +25,9 @@ class App extends Component {
     return (
       <MuiThemeProvider theme={null}>
         <Router>
-          <Route exact path="/" component={home}/>
-          <Route path="/login" component={login}/>
+          <Navbar />
+          <Route exact path="/" component={home} />
+          <Route path="/login" component={login} />
         </Router>
       </MuiThemeProvider>
     );
