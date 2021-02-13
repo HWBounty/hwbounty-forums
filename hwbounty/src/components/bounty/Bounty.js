@@ -38,7 +38,7 @@ const styles = {
   pointBounty: {},
 };
 
-class BountyCard extends Component {
+class Bounty extends Component {
   render() {
     dayjs.extend(relativeTime);
     const {
@@ -109,7 +109,7 @@ class BountyCard extends Component {
   }
 }
 
-BountyCard.propTypes = {
+Bounty.propTypes = {
   user: PropTypes.object.isRequired,
   bounty: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
