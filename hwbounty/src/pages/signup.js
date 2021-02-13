@@ -30,7 +30,7 @@ export class signup extends Component {
       email: "",
       password: "",
       confirmPassword: "",
-      handle: "",
+      username: "",
       errors: {},
     };
   }
@@ -43,7 +43,7 @@ export class signup extends Component {
       email: this.state.email,
       password: this.state.password,
       confirmPassword: this.state.confirmPassword,
-      handle: this.state.handle,
+      username: this.state.username,
     };
     this.props.signupUser(newUserData, this.props.history);
   };
@@ -53,12 +53,12 @@ export class signup extends Component {
     });
   };
   validateUsername = (e) => {
-    axios.get("/usernametaken/" + this.state.handle).then((res_obj) => {
+    axios.get("/usernametaken/" + this.state.username).then((res_obj) => {
       console.log(res_obj);
       this.setState({
         errors: {
-          handle: res_obj.data
-            ? "The handle is either taken or too short"
+          username: res_obj.data
+            ? "The name is either taken or too short"
             : null,
         },
       });
@@ -117,10 +117,10 @@ export class signup extends Component {
               fullWidth
             />
             <TextField
-              id="handle"
-              name="handle"
+              id="username"
+              name="username"
               type="text"
-              label="Handle (Username)"
+              label="Username"
               className={classes.textField}
               helperText={errors.handle}
               error={errors.handle ? true : false}

@@ -39,12 +39,14 @@ class App extends Component {
             <div>
               <Navbar />
             </div>
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/login" component={Login} />
-              <Route path="/signup" component={Signup} />
-              <Route path="*" component={PageNotFound} />
-            </Switch>
+            <div className="container">
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route path="/login" component={Login} />
+                <Route path="/signup" component={Signup} />
+                <Route path="*" component={PageNotFound} />
+              </Switch>
+            </div>
           </Router>
         </Provider>
       </MuiThemeProvider>
