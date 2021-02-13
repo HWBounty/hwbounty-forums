@@ -16,6 +16,7 @@ import Navbar from "./components/layout/Navbar";
 import home from "./pages/home";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
+import PageNotFound from "./pages/pagenotfound";
 
 import axios from "axios";
 
@@ -27,9 +28,12 @@ class App extends Component {
       <MuiThemeProvider theme={null}>
         <Router>
           <Navbar />
-          <Route exact path="/" component={home} />
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
+          <Switch>
+            <Route exact path="/" component={home} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+            <Route path="*" component={PageNotFound} />
+          </Switch>
         </Router>
       </MuiThemeProvider>
     );
