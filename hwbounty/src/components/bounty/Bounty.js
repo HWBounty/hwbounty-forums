@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import PropTypes from "prop-types";
-import TooltipButton from "../../util/TooltipButton";
+// import MyButton from "../../util/MyButton";
 import DeleteBounty from "./DeleteBounty";
 import BountyDialog from "./BountyDialog";
 import LikeButton from "./LikeButton";
@@ -94,9 +94,9 @@ class Bounty extends Component {
           </Typography>
           <LikeButton bountyId={bountyId} />
           <span>{likeCount} Likes</span>
-          <TooltipButton tip="comments">
+          {/* <MyButton tip="comments">
             <ChatIcon color="primary" />
-          </TooltipButton>
+          </MyButton> */}
           <span>{commentCount} Comments</span>
           <BountyDialog
             bountyId={bountyId}

@@ -23,6 +23,8 @@ import Home from "./pages/home";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
 import PageNotFound from "./pages/pagenotfound";
+import bountyview from "./pages/bountyview";
+import invalidbounty from "./pages/invalidbounty";
 
 import axios from "axios";
 
@@ -43,6 +45,8 @@ class App extends Component {
               <Route exact path="/" component={Home} />
               <Route path="/login" component={Login} />
               <Route path="/signup" component={Signup} />
+              <Route path="/bountyview/*" component={bountyview} />
+              <Route path="/invalidbounty" component={invalidbounty} />
               <Route path="*" component={PageNotFound} />
             </Switch>
           </Router>
