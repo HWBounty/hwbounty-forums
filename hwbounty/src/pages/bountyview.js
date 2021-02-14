@@ -30,6 +30,10 @@ import expandLabel, { compactLabel } from "../util/expandLabel";
 
 import BountyNotFound from "../components/bounty/BountyNotFound";
 
+// Redux
+import { submitComment } from "../redux/actions/dataActions";
+import { connect } from "react-redux";
+
 const styles = (theme) => ({
   ...theme.spreadIt,
   root: {
@@ -64,8 +68,8 @@ export class bountyview extends Component {
   constructor() {
     super();
     this.state = {
-      bounty: 0,
-      claimed: true,
+      points: 0,
+      claimed: false,
       id: 0,
       posterIcon: "",
       posterName: "",
@@ -75,6 +79,7 @@ export class bountyview extends Component {
       comments: [],
       valid: true,
       bounties: null,
+      comment: "", // what the user is writing now
     };
   }
 
@@ -95,7 +100,7 @@ export class bountyview extends Component {
               text: res_obj.data.description,
               posterName: res_obj.data.author.publicID,
               posterIcon: res_obj.data.author.pfp,
-              bounty: res_obj.data.points,
+              points: res_obj.data.points,
               claimed: false,
               labels: res_obj.data.tags.split(",").map((l, e) => {
                 return expandLabel(l);
@@ -120,6 +125,16 @@ export class bountyview extends Component {
           : this.setState({ valid: false });
         console.log(res_obj);
       });
+  };
+
+  handleCommentChanged = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  handleCommentSubmit = (event) => {
+    event.preventDefault();
+    this.props.submitComment(this.state.id, { comment: this.state.comment });
+    console.log("sldkfj");
   };
 
   render() {
@@ -176,25 +191,29 @@ export class bountyview extends Component {
                       })}
                     </Typography>
                     <BountyReward
-                      pointReward={this.state.bounty}
+                      pointReward={this.state.points}
                       claimed={this.state.claimed}
                     />
                   </CardContent>{" "}
                   <br /> <br />
-                  <CardActions disableSpacing>
-                    <TextField
-                      name="comment"
-                      type="comment"
-                      label="Comment"
-                      className={classes.textField}
-                      variant="outlined"
-                      size="small"
-                      fullWidth
-                    />
-                    <IconButton>
-                      <SendIcon color="primary" />
-                    </IconButton>
-                  </CardActions>
+                  <form onSubmit={this.handleCommentSubmit}>
+                    <CardActions disableSpacing>
+                        <TextField
+                          name="comment"
+                          type="text"
+                          label="Put you answer/comment here..."
+                          className={classes.textField}
+                          variant="outlined"
+                          size="small"
+                          autoComplete="off"
+                          fullWidth
+                          onChange={this.handleCommentChanged}
+                        />
+                        <IconButton type="submit">
+                          <SendIcon color="primary" />
+                        </IconButton>
+                    </CardActions>
+                  </form>
                 </Card>
               </Grid>
               {this.state.comments.map((c, i) => (
@@ -254,4 +273,8 @@ export class bountyview extends Component {
   }
 }
 
-export default withStyles(styles)(bountyview);
+const mapStateToProps = (state) => ({});
+
+export default connect(mapStateToProps, { submitComment })(
+  withStyles(styles)(bountyview)
+);

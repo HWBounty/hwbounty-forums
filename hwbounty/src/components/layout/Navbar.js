@@ -22,6 +22,7 @@ import SearchIcon from "@material-ui/icons/Search";
 // Images
 import HWBountyLogo from "../../images/HWBounty-Logo.png";
 import { connect } from "react-redux";
+import { logoutUser } from "../../redux/actions/userActions";
 
 const styles = {
   ...theme.spreadIt,
@@ -103,13 +104,18 @@ export class Navbar extends Component {
     searchTerm: "",
   };
 
-  handleSearch() {
+  handleSearch = (event) => {
+    event.preventDefault();
     this.props.history.push("?q=" + this.state.searchTerm);
     console.log("hello");
-  }
+  };
 
   handleChange = (event) => {
     this.state.searchTerm = event.target.value;
+  };
+
+  handleLogout = () => {
+    this.props.logoutUser();
   };
 
   render() {
@@ -152,18 +158,27 @@ export class Navbar extends Component {
                 inputProps={{ "aria-label": "search" }}
                 onChange={this.handleChange}
               />
-              </form>
+            </form>
             <Button className={classes.button} component={Link} to="/contactus">
               Contact Us
             </Button>{" "}
             {authenticated ? (
               <Fragment>
-                  <Button className={classes.button} component={Link} to="/postbounty">
-                    Post
-                  </Button>
-                  <Button className={classes.logOut} component={Link} onClick={localStorage.clear()} to="/">
-                    Log out
-                  </Button>
+                <Button
+                  className={classes.button}
+                  component={Link}
+                  to="/postbounty"
+                >
+                  Post
+                </Button>
+                <Button
+                  className={classes.logOut}
+                  component={Link}
+                  onClick={this.handleLogout}
+                  to="/"
+                >
+                  Log out
+                </Button>
                 <IconButton>
                   <img src={HWBountyLogo} className={classes.profileImage} />
                 </IconButton>
@@ -191,10 +206,13 @@ export class Navbar extends Component {
 
 Navbar.propTypes = {
   classes: PropTypes.object.isRequired,
+  logoutUser: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   authenticated: state.user.authenticated,
 });
 
-export default connect(mapStateToProps)(withRouter(withStyles(styles)(Navbar)));
+export default connect(mapStateToProps, { logoutUser })(
+  withRouter(withStyles(styles)(Navbar))
+);
