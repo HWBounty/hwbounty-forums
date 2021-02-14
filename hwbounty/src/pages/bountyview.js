@@ -134,7 +134,7 @@ export class bountyview extends Component {
   handleCommentSubmit = (event) => {
     event.preventDefault();
     this.props.submitComment(this.state.id, { comment: this.state.comment });
-    console.log("sldkfj");
+    window.location.reload();
   };
 
   render() {

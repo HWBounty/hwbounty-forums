@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import TooltipButton from "../util/TooltipButton";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import AppIcon from "../images/HWBounty-Logo.png";
 
 // Redux stuff
@@ -247,6 +247,6 @@ const mapStateToProps = (state) => ({
   UI: state.UI,
 });
 
-export default connect(mapStateToProps, { postBounty })(
+export default withRouter(connect(mapStateToProps, { postBounty })(
   withStyles(styles)(PostBounty)
-);
+));
