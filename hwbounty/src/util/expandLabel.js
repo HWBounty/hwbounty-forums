@@ -5,6 +5,8 @@ let validLabels = {
     mt: ["Math", { backgroundColor: "#ff3d00", color: "white", fontWeight: "bold"}],
     cs: ["Computer Science", { backgroundColor: "#3d5afe", color: "white", fontWeight: "bold"}],
     cn: ["Chinese", { backgroundColor: "#1b5e20", color: "white", fontWeight: "bold"}],
+    sc: ["Science", { backgroundColor: "#ff9100", color: "white", fontWeight: "bold"}],
+    hi: ["History", { backgroundColor: "#cddc39", color: "white", fontWeight: "bold"}],
 }
 
 let reverseLabels = {
@@ -14,6 +16,8 @@ let reverseLabels = {
     Math: 'mt',
     "Computer Science": 'cs',
     Chinese: 'cn',
+    History: 'hi',
+    Science: 'sc',
 }
 
 export default function expandLabel(label){

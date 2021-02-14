@@ -1,6 +1,7 @@
 // React
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
 
 // MUI
 import InputLabel from "@material-ui/core/InputLabel";
@@ -10,6 +11,8 @@ import Select from "@material-ui/core/Select";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import theme from "../../util/theme";
 import { withStyles } from "@material-ui/core";
+
+import { compactLabel } from "../../util/expandLabel"
 
 const styles = {
   formControl: {
@@ -22,19 +25,15 @@ export class BountyFilter extends Component {
   state = {
     gradeFilter: null,
     subjectFilter: null,
-    subjects: ["Math", "Science", "History", "English", "Spanish", "AP CS A"],
+    subjects: ["Math", "Science", "History", "English", "Spanish", "Computer Science", "Japanese", "Chinese"],
   };
 
   render() {
     const { classes } = this.props;
 
     const handleChange = (event) => {
-      const name = event.target.name;
-      this.setState({
-        ...this.state,
-
-        [name]: event.target.value,
-      });
+      this.props.history.push("/?t=" + compactLabel(event.target.value));
+      window.location.reload(false);
     };
 
     return (
@@ -75,4 +74,4 @@ export class BountyFilter extends Component {
 
 BountyFilter.propTypes = {};
 
-export default withStyles(styles)(BountyFilter);
+export default withRouter(withStyles(styles)(BountyFilter));

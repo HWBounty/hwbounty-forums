@@ -11,13 +11,25 @@ import BountySkeleton from "../util/BountySkeleton";
 import { connect } from "react-redux";
 import { getBounties, getFakeBounties } from "../redux/actions/dataActions";
 
+function getQueryVariable(variable, querystring) {
+  var query = querystring.substring(1);
+  var vars = query.split('&');
+  for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (decodeURIComponent(pair[0]) == variable) {
+          return decodeURIComponent(pair[1]);
+      }
+  }
+}
+
 export class home extends Component {
   state = {
     bounties: null,
   };
 
   componentDidMount() {
-    this.props.getBounties();
+    console.log(getQueryVariable("t", this.props.location.search));
+    this.props.getBounties((getQueryVariable("t", this.props.location.search) ? getQueryVariable("t", this.props.location.search) + "?0?time" : "all?0?time"));
   }
 
 
