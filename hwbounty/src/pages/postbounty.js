@@ -22,6 +22,8 @@ import { Typography } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import Grid from "@material-ui/core/Grid";
 
+import expandLabel from "../util/expandLabel"
+
 const styles = (theme) => ({
   ...theme.spreadIt,
   pageTitle: {
@@ -84,6 +86,7 @@ class PostBounty extends Component {
     body: "",
     points: 0,
     ppoints: 0,
+    tags: "",
     errors: {},
   };
   componentWillReceiveProps(nextProps) {
@@ -101,6 +104,34 @@ class PostBounty extends Component {
   handleTextChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
+  handleTagChange = (event) => {
+    this.setState({
+      ...this.state,
+      errors: {
+        ...this.state.errors,
+        tags: null,
+      },
+    })
+    event.target.value.split(", ").map((i, e) => expandLabel(i)).map((i, e) => {
+      
+      if (i[0] == "invalid"){ 
+      this.setState({
+        ...this.state,
+        errors: {
+          ...this.state.errors,
+          tags: "Invalid tag(s)",
+        },
+      }) 
+     } });
+    if (this.state.errors.tags)
+    {
+      return;
+    }
+    this.setState({
+      ...this.state,
+      tags: event.target.value.replace(/\s/g, "")
+    })
+  }
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.postBounty({
@@ -108,6 +139,7 @@ class PostBounty extends Component {
       body: this.state.body,
       points: this.state.points,
       ppoints: this.state.ppoints,
+      tags: this.state.tags,
     });
   };
   render() {
@@ -167,8 +199,19 @@ class PostBounty extends Component {
               onChange={this.handleTextChange}
               error={errors.body ? true : false}
               helperText={errors.body}
+              style={{paddingBottom: "2%"}}
               fullWidth
             />{" "}
+            <TextField
+              name="tags"
+              type="tags"
+              label="Tags (seperated by a comma then a space)"
+              fullWidth
+              error={errors.tags ? true : false}
+                helperText={errors.tags}
+              variant="outlined"
+              onChange={this.handleTagChange}
+            />
             <br />
             {errors.general && (
               <Typography variant="body2" className={classes.customError}>
