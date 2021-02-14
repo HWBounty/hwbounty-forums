@@ -2,7 +2,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import AppIcon from "../images/favicon.ico";
-import { Link, withRouter } from "react-router-dom";
 
 //MUI Stuff
 import { withStyles } from '@material-ui/core/styles';
@@ -22,6 +21,9 @@ import Chip from '@material-ui/core/Chip';
 
 // Requests
 import axios from "axios";
+
+// Invalid Page
+import InvalidBounty from '../components/layout/InvalidBounty'
 
 // Expanding labels
 import expandLabel from '../util/expandLabel'
@@ -65,6 +67,7 @@ export class bountyview extends Component {
       title: "",
       text: "​",
       comments: [],
+      valid: true,
     };
   }
 
@@ -80,7 +83,7 @@ export class bountyview extends Component {
             bounty: res_obj.data.points,
             claimed: false,
             labels: res_obj.data.tags.split(",").map((l, e) => {return expandLabel(l)}),
-        }) : this.props.history.push("/invalidbounty"))
+        }) : this.setState( { valid: false } ))
         this.setState({
           errors: {
             handle: res_obj.data.data
@@ -94,53 +97,55 @@ export class bountyview extends Component {
   render() {
     const classes = this.props;
     return (
-        <Card className={classes.root}>
-        <CardHeader
-          avatar={
-            <Avatar aria-label={this.state.posterName} src={this.state.posterIcon} />
-          }
-          action={
-            <IconButton aria-label="settings">
-              <MoreVertIcon />
-            </IconButton>
-          }
-          title={this.state.title}
-          subheader={"Posted by: " + this.state.posterName}
-        />
-        <CardContent>
-          {this.state.labels.length > 0 ? 
-            <span>
+        <span>
+            {(this.state.valid ? <Card className={classes.root}>
+            <CardHeader
+            avatar={
+                <Avatar aria-label={this.state.posterName} src={this.state.posterIcon} />
+            }
+            action={
+                <IconButton aria-label="settings">
+                <MoreVertIcon />
+                </IconButton>
+            }
+            title={this.state.title}
+            subheader={"Posted by: " + this.state.posterName}
+            />
+            <CardContent>
+            {this.state.labels.length > 0 ? 
                 <span>
-                Topics:
-                </span> <br />
-                {this.state.labels.map((l, i) => {
-                    return (<Chip label={l[0]} style={l[1]} component="a" href={"/?t=" + compactLabel(l[0])} clickable />);
-                })} <br /> <br /> 
-            </span> 
-          : null}
+                    <span>
+                    Topics:
+                    </span> <br />
+                    {this.state.labels.map((l, i) => {
+                        return (<Chip label={l[0]} style={l[1]} component="a" href={"/?t=" + compactLabel(l[0])} clickable />);
+                    })} <br /> <br /> 
+                </span> 
+            : null}
 
-          <Typography variant="body2" color="textSecondary" component="p">
-            {this.state.text.split("\n").map((l, i) => {
-                return(
-                    <span id={i}>
-                        {l}
-                        <br />
-                    </span>
-                );
-            })}
-          </Typography>
-          <BountyReward pointReward={this.state.bounty} claimed={this.state.claimed} />
-        </CardContent>
-        <CardActions disableSpacing>
-            <LikeButton bountyId={this.state.id} />
+            <Typography variant="body2" color="textSecondary" component="p">
+                {this.state.text.split("\n").map((l, i) => {
+                    return(
+                        <span id={i}>
+                            {l}
+                            <br />
+                        </span>
+                    );
+                })}
+            </Typography>
+            <BountyReward pointReward={this.state.bounty} claimed={this.state.claimed} />
+            </CardContent>
+            <CardActions disableSpacing>
+                <LikeButton bountyId={this.state.id} />
 
-          <IconButton>
-            <CommentIcon />
-          </IconButton>
-        </CardActions>
-      </Card>
+            <IconButton>
+                <CommentIcon />
+            </IconButton>
+            </CardActions>
+        </Card> : <InvalidBounty />)}
+      </span>
     );
   }
 }
 
-export default withRouter(withStyles(styles)(bountyview));
+export default withStyles(styles)(bountyview);

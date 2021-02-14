@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 // Redux
 import { connect } from "react-redux";
 
-export class PageNotFound extends Component {
+export class InvalidBounty extends Component {
     render() {
         return (
             <div className="App">
@@ -26,4 +26,4 @@ export class PageNotFound extends Component {
     }
 }
 
-export default PageNotFound;
+export default InvalidBounty;
