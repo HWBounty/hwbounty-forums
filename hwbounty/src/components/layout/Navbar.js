@@ -146,6 +146,9 @@ export class Navbar extends Component {
                 onChange={this.handleChange}
               />
             </form>
+            <Button className={classes.button} component={Link} to="/contactus">
+              Contact Us
+            </Button>{" "}
             {authenticated ? (
               <IconButton>
                 <img src={HWBountyLogo} className={classes.profileImage} />

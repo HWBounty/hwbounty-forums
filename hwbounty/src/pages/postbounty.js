@@ -12,7 +12,6 @@ import { postBounty } from "../redux/actions/dataActions";
 // MUI stuff
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import Card from "@material-ui/core/Card";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -20,6 +19,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
 import { Typography } from "@material-ui/core";
+import Card from "@material-ui/core/Card";
 import Grid from "@material-ui/core/Grid";
 
 const styles = (theme) => ({
@@ -75,7 +75,7 @@ const styles = (theme) => ({
     ...theme.spreadIt.button,
     minWidth: "23%",
     float: "right",
-  },
+  }
 });
 
 class PostBounty extends Component {
@@ -120,8 +120,7 @@ class PostBounty extends Component {
             <Typography variant="h4" className={classes.pageTitle}>
               Post a bounty
             </Typography>
-            <img src={AppIcon} alt="hwbounty logo" className={classes.image} />{" "}
-            <br /> <br /> <br /> <br /> <br /> <br />
+            <img src={AppIcon} alt="hwbounty logo" className={classes.image} /> <br /> <br /> <br /> <br /> <br /> <br />
             <TextField
               id="title"
               name="title"
@@ -139,8 +138,7 @@ class PostBounty extends Component {
               width="20%"
               variant="outlined"
               className={classes.numberField}
-            />{" "}
-            <br />
+            /> <br />
             <TextField
               id="outlined-multiline-static"
               id="content"
@@ -152,8 +150,7 @@ class PostBounty extends Component {
               defaultValue=""
               variant="outlined"
               fullWidth
-            />{" "}
-            <br />
+            /> <br />
             {errors.general && (
               <Typography variant="body2" className={classes.customError}>
                 {errors.general}
@@ -171,8 +168,8 @@ class PostBounty extends Component {
               )}
             </Button>
             <br />
+            </Grid>
           </Grid>
-        </Grid>
       </Card>
     );
   }
