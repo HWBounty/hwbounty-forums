@@ -60,7 +60,7 @@ const styles = (theme) => ({
   },
   titleField: {
     margin: "15px auto 15px auto",
-    width: "75%",
+    width: "50%",
     paddingRight: "2%",
   },
   numberField: {
@@ -139,18 +139,17 @@ class PostBounty extends Component {
               name="points"
               type="number"
               label="Points"
-              width="20%"
               className={classes.numberField}
               error={errors.points ? true : false}
               helperText={errors.points}
               variant="outlined"
+              style={{paddingRight: "2%"}}
               onChange={this.handleBountyChange}
             />
             <TextField
               name="ppoints"
               type="number"
               label="Premium Points"
-              width="20%"
               variant="outlined"
               className={classes.numberField}
               error={errors.ppoints ? true : false}

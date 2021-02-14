@@ -68,6 +68,7 @@ export class bountyview extends Component {
       text: "​",
       comments: [],
       valid: true,
+      bounties: null,
     };
   }
 
@@ -117,98 +118,99 @@ export class bountyview extends Component {
   render() {
     const { classes } = this.props;
     const { valid } = this.state;
-
     return (
       <div className={classes.rootPadding}>
         {valid ? (
-          <Grid container className={classes.root} spacing={2}>
-            <Grid item xs={12}>
-              <Card>
-                <CardHeader
-                  avatar={
-                    <Avatar
-                      aria-label={this.state.posterName}
-                      src={this.state.posterIcon}
-                    />
-                  }
-                  title={this.state.title}
-                  subheader={"Posted by: " + this.state.posterName}
-                />
-                <CardContent>
-                  {this.state.labels.length > 0 ? (
-                    <span>
-                      <span>Topics:</span> <br />
-                      {this.state.labels.map((l, i) => {
-                        return (
-                          <Chip
-                            label={l[0]}
-                            style={l[1]}
-                            component="a"
-                            href={"/?t=" + compactLabel(l[0])}
-                            clickable
-                          />
-                        );
-                      })}{" "}
-                      <br /> <br />
-                    </span>
-                  ) : null}
-
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    {this.state.text.split("\n").map((l, i) => {
-                      return (
-                        <span id={i}>
-                          {l}
-                          <br />
-                        </span>
-                      );
-                    })}
-                  </Typography>
-                  <BountyReward
-                    pointReward={this.state.bounty}
-                    claimed={this.state.claimed}
-                  />
-                </CardContent>{" "}
-                <br /> <br />
-                <CardActions disableSpacing>
-                  <TextField
-                    name="comment"
-                    type="text"
-                    label="Write a comment/answer here..."
-                    className={classes.textField}
-                    variant="outlined"
-                    size="small"
-                    fullWidth
-                  />
-                  <IconButton>
-                    <SendIcon color="primary" />
-                  </IconButton>
-                </CardActions>
-              </Card>
-            </Grid>
-            {this.state.comments.map((c, i) => (
+          <span>
+            <Grid container className={classes.root} spacing={2}>
               <Grid item xs={12}>
-                <Card
-                  className={
-                    c.parentCommentID != null ? classes.childComment : null
-                  }
-                >
-                  {c.comment}{" "}
-                  {c.edited > 0 ? (
-                    <small style={{ color: "gray" }}>(edited)</small>
-                  ) : null}
-                  {c.parentCommentID != null ? null : (
-                    <IconButton className={classes.answerCheck}>
-                      <CheckIcon color="disable" />
+                <Card>
+                  <CardHeader
+                    avatar={
+                      <Avatar
+                        aria-label={this.state.posterName}
+                        src={this.state.posterIcon}
+                      />
+                    }
+                    title={this.state.title}
+                    subheader={"Posted by: " + this.state.posterName}
+                  />
+                  <CardContent>
+                    {this.state.labels.length > 0 ? (
+                      <span>
+                        <span>Topics:</span> <br />
+                        {this.state.labels.map((l, i) => {
+                          return (
+                            <Chip
+                              label={l[0]}
+                              style={l[1]}
+                              component="a"
+                              href={"/?t=" + compactLabel(l[0])}
+                              clickable
+                            />
+                          );
+                        })}{" "}
+                        <br /> <br />
+                      </span>
+                    ) : null}
+
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      {this.state.text.split("\n").map((l, i) => {
+                        return (
+                          <span id={i}>
+                            {l}
+                            <br />
+                          </span>
+                        );
+                      })}
+                    </Typography>
+                    <BountyReward
+                      pointReward={this.state.bounty}
+                      claimed={this.state.claimed}
+                    />
+                  </CardContent>{" "}
+                  <br /> <br />
+                  <CardActions disableSpacing>
+                    <TextField
+                      name="title"
+                      type="title"
+                      label="Title"
+                      className={classes.textField}
+                      variant="outlined"
+                      size="small"
+                      fullWidth
+                    />
+                    <IconButton>
+                      <SendIcon color="primary" />
                     </IconButton>
-                  )}
+                  </CardActions>
                 </Card>
               </Grid>
-            ))}
-          </Grid>
+              {this.state.comments.map((c, i) => (
+                <Grid item xs={12}>
+                  <Card
+                    className={
+                      c.parentCommentID != null ? classes.childComment : null
+                    }
+                  >
+                    {c.comment}{" "}
+                    {c.edited > 0 ? (
+                      <small style={{ color: "gray" }}>(edited)</small>
+                    ) : null}
+                    {c.parentCommentID != null ? null : (
+                      <IconButton className={classes.answerCheck}>
+                        <CheckIcon color="disable" />
+                      </IconButton>
+                    )}
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+          </span>
         ) : (
           <BountyNotFound />
         )}
