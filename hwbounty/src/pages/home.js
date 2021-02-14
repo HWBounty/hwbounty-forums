@@ -52,7 +52,7 @@ export class home extends Component {
     );
     return (
       <div className={classes.rootPadding}>
-        <Grid container spacing={8}>
+        <Grid container spacing={7}>
           <Grid item sm={12} xs={12}>
             <BountyFilter />
           </Grid>
