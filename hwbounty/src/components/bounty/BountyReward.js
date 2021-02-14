@@ -10,7 +10,6 @@ const styles = (theme) => ({
   reward: {
     color: theme.spreadIt.points.color,
     position: "absolute",
-    left: "50%",
   },
 });
 
@@ -21,10 +20,10 @@ export class BountyReward extends Component {
     const bountyReward = claimed ? (
       [claimed]
     ) : (
-      <Typography variant="h6" align="right" className={classes.reward}>
-        <Box fontWeight={pointReward} m={1}>
+      <Typography variant="h6" className={classes.reward}>
+        <span fontWeight={pointReward} m={1}>
           {pointReward} Points
-        </Box>
+        </span>
       </Typography>
     );
 

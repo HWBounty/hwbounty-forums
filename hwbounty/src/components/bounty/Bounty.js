@@ -51,6 +51,9 @@ const styles = {
   username: {
     paddingLeft: 10,
   },
+  points: {
+    paddingLeft: "50%",
+  },
 };
 
 class Bounty extends Component {
@@ -98,7 +101,9 @@ class Bounty extends Component {
               >
                 {author.publicID}
               </Typography>
-              <BountyReward pointReward={points} claimed={claimed} />
+              <span className={classes.points}>
+                <BountyReward pointReward={points} claimed={claimed} />
+              </span>
             </div>
             {deleteButton}
             <Typography variant="body2" color="textSecondary">

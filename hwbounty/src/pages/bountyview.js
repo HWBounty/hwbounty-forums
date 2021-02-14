@@ -12,13 +12,13 @@ import CardActions from "@material-ui/core/CardActions";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import { red } from "@material-ui/core/colors";
 import CommentIcon from "@material-ui/icons/Comment";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import LikeButton from "../components/bounty/LikeButton";
 import BountyReward from "../components/bounty/BountyReward";
 import Chip from "@material-ui/core/Chip";
-import Button from "@material-ui/core/Button";
+import SendIcon from '@material-ui/icons/Send';
+import TextField from "@material-ui/core/TextField";
 
 // Requests
 import axios from "axios";
@@ -33,6 +33,14 @@ const styles = (theme) => ({
   root: {
     width: "50%",
     textAlign: "left",
+    float: "left",
+  },
+  textField: {
+    margin: "15px auto 15px auto",
+    width: "100%",
+  },
+  points: {
+    right: "10%",
   },
 });
 
@@ -88,11 +96,13 @@ export class bountyview extends Component {
   };
 
   render() {
-    const classes = this.props;
+    const {
+      classes
+    } = this.props;
     const { valid } = this.state;
 
     return (
-      <div>
+      <span>
         {valid ? (
           <Card className={classes.root}>
             <CardHeader
@@ -101,11 +111,6 @@ export class bountyview extends Component {
                   aria-label={this.state.posterName}
                   src={this.state.posterIcon}
                 />
-              }
-              action={
-                <IconButton aria-label="settings">
-                  <MoreVertIcon />
-                </IconButton>
               }
               title={this.state.title}
               subheader={"Posted by: " + this.state.posterName}
@@ -141,21 +146,30 @@ export class bountyview extends Component {
               </Typography>
               <BountyReward
                 pointReward={this.state.bounty}
-                claimed={this.state.claimed}
+               claimed={this.state.claimed}
               />
-            </CardContent>
+            </CardContent> <br /> <br />
             <CardActions disableSpacing>
-              <LikeButton bountyId={this.state.id} />
-
+              <TextField
+                id="title"
+                name="title"
+                type="title"
+                label="Title"
+                className={classes.textField}
+                variant="outlined"
+                size="small"
+                fullWidth
+              />
               <IconButton>
-                <CommentIcon />
+                <SendIcon color="primary" />
               </IconButton>
             </CardActions>
           </Card>
+
         ) : (
           <BountyNotFound />
         )}
-      </div>
+      </span>
     );
   }
 }
