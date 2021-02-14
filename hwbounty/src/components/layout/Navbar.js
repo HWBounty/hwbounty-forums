@@ -31,6 +31,12 @@ const styles = {
     height: "50px",
     color: "white",
   },
+  logOut: {
+    ...theme.button,
+    height: "50px",
+    color: "red",
+    fontWeight: "bold",
+  },
   navBar: {
     backgroundColor: theme.palette.primary.main,
     overflowY: "hidden",
@@ -146,14 +152,22 @@ export class Navbar extends Component {
                 inputProps={{ "aria-label": "search" }}
                 onChange={this.handleChange}
               />
-            </form>
+              </form>
             <Button className={classes.button} component={Link} to="/contactus">
               Contact Us
             </Button>{" "}
             {authenticated ? (
-              <IconButton>
-                <img src={HWBountyLogo} className={classes.profileImage} />
-              </IconButton>
+              <Fragment>
+                  <Button className={classes.button} component={Link} to="/postbounty">
+                    Post
+                  </Button>
+                  <Button className={classes.logOut} component={Link} onClick={localStorage.clear()} to="/">
+                    Log out
+                  </Button>
+                <IconButton>
+                  <img src={HWBountyLogo} className={classes.profileImage} />
+                </IconButton>
+              </Fragment>
             ) : (
               <Fragment>
                 <Button className={classes.button} component={Link} to="/login">
