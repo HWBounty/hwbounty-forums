@@ -31,7 +31,7 @@ import BountyNotFound from "../components/bounty/BountyNotFound";
 const styles = (theme) => ({
   ...theme.spreadIt,
   root: {
-    maxWidth: 345,
+    maxWidth: "50%",
     textAlign: "left",
   },
   media: {
