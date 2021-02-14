@@ -15,10 +15,10 @@ import {
 import axios from "axios";
 
 // Get all bounties
-export const getBounties = () => (dispatch) => {
+export const getBounties = (filter) => (dispatch) => {
   dispatch({ type: LOADING_DATA });
   axios
-    .get("/fetchbounties/all?0?time")
+    .get("/fetchbounties/" + filter)
     .then((res) => {
       dispatch({
         type: SET_BOUNTIES,
