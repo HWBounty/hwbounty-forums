@@ -53,10 +53,10 @@ export const signupUser = (newUserData, history) => (dispatch) => {
     });
 };
 
-export const getUserData = () => (dispatch) => {
+export const getUserData = (token) => (dispatch) => {
   dispatch({ type: LOADING_USER });
   axios
-    .get("/user")
+    .get("/@me")
     .then((res) => {
       dispatch({
         type: SET_USER,
