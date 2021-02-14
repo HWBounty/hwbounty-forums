@@ -82,8 +82,8 @@ class PostBounty extends Component {
   state = {
     title: "",
     body: "",
-    points: null,
-    ppoints: null,
+    points: 0,
+    ppoints: 0,
     errors: {},
   };
   componentWillReceiveProps(nextProps) {
@@ -92,7 +92,7 @@ class PostBounty extends Component {
     }
     if (!nextProps.UI.errors && !nextProps.UI.loading) {
       this.setState({ body: "" });
-      this.handleClose();
+      this.props.history.push("/");
     }
   }
   handleBountyChange = (event) => {
@@ -107,6 +107,7 @@ class PostBounty extends Component {
       title: this.state.title,
       body: this.state.body,
       points: this.state.points,
+      ppoints: this.state.ppoints,
     });
   };
   render() {
@@ -125,7 +126,6 @@ class PostBounty extends Component {
             <img src={AppIcon} alt="hwbounty logo" className={classes.image} />{" "}
             <br /> <br /> <br /> <br /> <br /> <br />
             <TextField
-              id="title"
               name="title"
               type="title"
               label="Title"
@@ -136,7 +136,6 @@ class PostBounty extends Component {
               onChange={this.handleTextChange}
             />
             <TextField
-              id="points"
               name="points"
               type="number"
               label="Points"
@@ -148,7 +147,6 @@ class PostBounty extends Component {
               onChange={this.handleBountyChange}
             />
             <TextField
-              id="ppoints"
               name="ppoints"
               type="number"
               label="Premium Points"
@@ -161,7 +159,6 @@ class PostBounty extends Component {
             />{" "}
             <br />
             <TextField
-              id="body"
               name="body"
               type="text"
               label="Body"

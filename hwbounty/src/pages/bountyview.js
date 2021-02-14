@@ -20,7 +20,7 @@ import Grid from "@material-ui/core/Grid";
 import Chip from "@material-ui/core/Chip";
 import SendIcon from "@material-ui/icons/Send";
 import TextField from "@material-ui/core/TextField";
-import CheckIcon from '@material-ui/icons/Check';
+import CheckIcon from "@material-ui/icons/Check";
 
 // Requests
 import axios from "axios";
@@ -95,10 +95,9 @@ export class bountyview extends Component {
               }),
             })
           : this.setState({ valid: false });
-        
       });
 
-      axios
+    axios
       .get(
         "/comments/" +
           this.props.location.pathname.substring(
@@ -107,12 +106,11 @@ export class bountyview extends Component {
       )
       .then((res_obj) => {
         res_obj.data
-          ? this.setState({ 
-            ...this.state,
-            comments: res_obj.data,
-          })
+          ? this.setState({
+              ...this.state,
+              comments: res_obj.data,
+            })
           : this.setState({ valid: false });
-      
       });
   };
 
@@ -125,7 +123,7 @@ export class bountyview extends Component {
         {valid ? (
           <Grid container className={classes.root} spacing={2}>
             <Grid item xs={12}>
-              <Card >
+              <Card>
                 <CardHeader
                   avatar={
                     <Avatar
@@ -155,7 +153,11 @@ export class bountyview extends Component {
                     </span>
                   ) : null}
 
-                  <Typography variant="body2" color="textSecondary" component="p">
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
                     {this.state.text.split("\n").map((l, i) => {
                       return (
                         <span id={i}>
@@ -173,10 +175,9 @@ export class bountyview extends Component {
                 <br /> <br />
                 <CardActions disableSpacing>
                   <TextField
-                    id="title"
-                    name="title"
-                    type="title"
-                    label="Title"
+                    name="comment"
+                    type="text"
+                    label="Write a comment/answer here..."
                     className={classes.textField}
                     variant="outlined"
                     size="small"
@@ -188,16 +189,25 @@ export class bountyview extends Component {
                 </CardActions>
               </Card>
             </Grid>
-            {this.state.comments.map((c, i) => 
+            {this.state.comments.map((c, i) => (
               <Grid item xs={12}>
-                <Card className={(c.parentCommentID != null ? classes.childComment : null)}>
-                  {c.comment} {(c.edited > 0 ? <small style={{color: "gray"}}>(edited)</small>: null)}
-                  {(c.parentCommentID != null ? null : <IconButton className={classes.answerCheck}>
-                    <CheckIcon color="disable" />
-                  </IconButton>)}
+                <Card
+                  className={
+                    c.parentCommentID != null ? classes.childComment : null
+                  }
+                >
+                  {c.comment}{" "}
+                  {c.edited > 0 ? (
+                    <small style={{ color: "gray" }}>(edited)</small>
+                  ) : null}
+                  {c.parentCommentID != null ? null : (
+                    <IconButton className={classes.answerCheck}>
+                      <CheckIcon color="disable" />
+                    </IconButton>
+                  )}
                 </Card>
               </Grid>
-            )}
+            ))}
           </Grid>
         ) : (
           <BountyNotFound />
