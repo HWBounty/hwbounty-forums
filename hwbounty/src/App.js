@@ -23,7 +23,8 @@ import Home from "./pages/home";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
 import PageNotFound from "./pages/pagenotfound";
-import bountyview from "./pages/bountyview";
+import BountyView from "./pages/bountyview";
+//import doath from "./pages/doath";
 
 import axios from "axios";
 
@@ -45,7 +46,9 @@ class App extends Component {
                 <Route exact path="/" component={Home} />
                 <Route path="/login" component={Login} />
                 <Route path="/signup" component={Signup} />
-                <Route path="/bountyview/*" component={bountyview} />
+                <Route path="/bountyview/*" component={BountyView} />
+                <Route path="/vsuccess" component={null} />
+                <Route path="/doath*" component={null} />
                 <Route path="*" component={PageNotFound} />
               </Switch>
             </Router>
