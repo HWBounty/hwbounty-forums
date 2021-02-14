@@ -130,11 +130,18 @@ export class bountyview extends Component {
   handleCommentChanged = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
+  
 
   handleCommentSubmit = (event) => {
     event.preventDefault();
     this.props.submitComment(this.state.id, { comment: this.state.comment });
-    window.location.reload();
+      window.location.reload();
+  };
+
+  handleCommentReplySubmit = (parentID, event) => {
+    event.preventDefault();
+    this.props.submitComment(this.state.id, { comment: this.state.comment, parentID: parentID });
+      window.location.reload();
   };
 
   render() {
@@ -196,7 +203,7 @@ export class bountyview extends Component {
                     />
                   </CardContent>{" "}
                   <br /> <br />
-                  <form onSubmit={this.handleCommentSubmit}>
+                  <form onSubmit={this.handleCommentReplySubmit}>
                     <CardActions disableSpacing>
                         <TextField
                           name="comment"
@@ -243,21 +250,23 @@ export class bountyview extends Component {
                     ) : null}
                     {c.parentCommentID != null ? null : (
                       <span> <br />
-
-                        <CardActions disableSpacing>
-                        <TextField
-                          name="comment"
-                          type="comment"
-                          label="Comment"
-                          className={classes.textField}
-                          variant="outlined"
-                          size="small"
-                          fullWidth
-                        />
-                        <IconButton>
-                          <SendIcon color="primary" />
-                        </IconButton>
-                  </CardActions>
+                        
+                      <form onSubmit={this.handleCommentSubmit(c.commentID)}>
+                          <CardActions disableSpacing>
+                          <TextField
+                            name="comment"
+                            type="comment"
+                            label="Comment"
+                            className={classes.textField}
+                            variant="outlined"
+                            size="small"
+                            fullWidth
+                          />
+                          <IconButton type="submit">
+                            <SendIcon color="primary" />
+                          </IconButton>
+                    </CardActions>
+                  </form>
                   </span>
                     )}
                   </Card>
