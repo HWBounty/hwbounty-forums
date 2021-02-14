@@ -75,7 +75,7 @@ class Bounty extends Component {
       },
       user: {
         authenticated,
-        credentials: { username },
+        info: { username },
       },
     } = this.props;
 

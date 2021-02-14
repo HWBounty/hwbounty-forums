@@ -75,14 +75,15 @@ const styles = (theme) => ({
     ...theme.spreadIt.button,
     minWidth: "23%",
     float: "right",
-  }
+  },
 });
 
 class PostBounty extends Component {
   state = {
-    open: false,
+    title: "",
     body: "",
-    pointReward: null,
+    points: null,
+    ppoints: null,
     errors: {},
   };
   componentWillReceiveProps(nextProps) {
@@ -97,14 +98,15 @@ class PostBounty extends Component {
   handleBountyChange = (event) => {
     this.setState({ [event.target.name]: parseInt(event.target.value) });
   };
-  handleChange = (event) => {
+  handleTextChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.postBounty({
+      title: this.state.title,
       body: this.state.body,
-      pointReward: this.state.pointReward,
+      points: this.state.points,
     });
   };
   render() {
@@ -120,37 +122,58 @@ class PostBounty extends Component {
             <Typography variant="h4" className={classes.pageTitle}>
               Post a bounty
             </Typography>
-            <img src={AppIcon} alt="hwbounty logo" className={classes.image} /> <br /> <br /> <br /> <br /> <br /> <br />
+            <img src={AppIcon} alt="hwbounty logo" className={classes.image} />{" "}
+            <br /> <br /> <br /> <br /> <br /> <br />
             <TextField
               id="title"
               name="title"
               type="title"
               label="Title"
               className={classes.titleField}
+              error={errors.title ? true : false}
+              helperText={errors.title}
               variant="outlined"
+              onChange={this.handleTextChange}
             />
             <TextField
-              id="standard-number"
               id="points"
               name="points"
               type="number"
               label="Points"
               width="20%"
+              className={classes.numberField}
+              error={errors.points ? true : false}
+              helperText={errors.points}
+              variant="outlined"
+              onChange={this.handleBountyChange}
+            />
+            <TextField
+              id="ppoints"
+              name="ppoints"
+              type="number"
+              label="Premium Points"
+              width="20%"
               variant="outlined"
               className={classes.numberField}
-            /> <br />
+              error={errors.ppoints ? true : false}
+              helperText={errors.ppoints}
+              onChange={this.handleBountyChange}
+            />{" "}
+            <br />
             <TextField
-              id="outlined-multiline-static"
-              id="content"
-              name="content"
-              type="content"
-              label="Content"
+              id="body"
+              name="body"
+              type="text"
+              label="Body"
               multiline
               rows={18}
-              defaultValue=""
               variant="outlined"
+              onChange={this.handleTextChange}
+              error={errors.body ? true : false}
+              helperText={errors.body}
               fullWidth
-            /> <br />
+            />{" "}
+            <br />
             {errors.general && (
               <Typography variant="body2" className={classes.customError}>
                 {errors.general}
@@ -161,6 +184,7 @@ class PostBounty extends Component {
               color="primary"
               className={classes.button}
               disabled={loading}
+              onClick={this.handleSubmit}
             >
               Post
               {loading && (
@@ -168,8 +192,8 @@ class PostBounty extends Component {
               )}
             </Button>
             <br />
-            </Grid>
           </Grid>
+        </Grid>
       </Card>
     );
   }

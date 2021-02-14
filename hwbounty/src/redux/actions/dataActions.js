@@ -33,24 +33,6 @@ export const getBounties = (filter) => (dispatch) => {
     });
 };
 
-export const getFakeBounties = () => (dispatch) => {
-  dispatch({ type: LOADING_DATA });
-  axios
-    .get("/fakebounties")
-    .then((res) => {
-      dispatch({
-        type: SET_BOUNTIES,
-        payload: res.data,
-      });
-    })
-    .catch((err) => {
-      dispatch({
-        type: SET_BOUNTIES,
-        payload: [],
-      });
-    });
-};
-
 export const getBounty = (bountyId) => (dispatch) => {
   dispatch({ type: LOADING_UI });
   axios
@@ -69,8 +51,9 @@ export const getBounty = (bountyId) => (dispatch) => {
 export const postBounty = (newBounty) => (dispatch) => {
   dispatch({ type: LOADING_UI });
   axios
-    .post("/post", newBounty)
+    .post("/bounty", newBounty)
     .then((res) => {
+      console.log("we posted it");
       dispatch({
         type: POST_BOUNTY,
         payload: res.data,
@@ -78,6 +61,7 @@ export const postBounty = (newBounty) => (dispatch) => {
       dispatch(clearErrors());
     })
     .catch((err) => {
+      console.log("errors");
       dispatch({
         type: SET_ERRORS,
         payload: err.response.data,

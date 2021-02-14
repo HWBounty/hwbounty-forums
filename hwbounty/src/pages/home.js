@@ -8,14 +8,16 @@ import Bounty from "../components/bounty/Bounty";
 import BountyFilter from "../components/layout/BountyFilter";
 import BountySkeleton from "../util/BountySkeleton";
 
-// Styling
+// MUI
 import Grid from "@material-ui/core/Grid";
-import theme from "../util/theme";
+import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
+import theme from "../util/theme";
 
 // Redux
 import { connect } from "react-redux";
 import { getBounties } from "../redux/actions/dataActions";
+import { Link } from "react-router-dom";
 
 const styles = {
   ...theme.spreadIt,
@@ -62,6 +64,11 @@ export class home extends Component {
           </Grid>
           <Grid item sm={8} xs={12}>
             {recentBountiesMarkup}
+          </Grid>
+          <Grid item sm={12} xs={12}>
+            <Button component={Link} to="/postbounty">
+              Post
+            </Button>
           </Grid>
           {/*<Grid item sm={4} xs={12}>
             <Profile />

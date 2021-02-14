@@ -101,9 +101,6 @@ export class signup extends Component {
       user,
     } = this.props;
     const { errors, userConfirmedEmail, signupSuccess } = this.state;
-    console.log(
-      "signup state is" + signupSuccess + " SLDF" + user.signupSuccess
-    );
     return (
       <Fragment>
         <Card className={classes.formCard}>
