@@ -136,7 +136,6 @@ class Bounty extends Component {
                   />
                 );
               })}
-            <span>{commentCount} Comments</span>
             <BountyDialog
               bountyId={bountyID}
               userHandle={author.publicID}
