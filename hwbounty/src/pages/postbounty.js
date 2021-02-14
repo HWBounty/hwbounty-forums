@@ -2,6 +2,8 @@ import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import TooltipButton from "../util/TooltipButton";
+import { Link } from "react-router-dom";
+import AppIcon from "../images/HWBounty-Logo.png";
 
 // Redux stuff
 import { connect } from "react-redux";
@@ -18,15 +20,61 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
 import { Typography } from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
 
 const styles = (theme) => ({
   ...theme.spreadIt,
   pageTitle: {
     ...theme.spreadIt.pageTitle,
+    float: "left",
+    paddingTop: 15,
+  },
+  image: {
+    ...theme.spreadIt.image,
+    float: "right",
+    maxWidth: "10%",
+    paddingRight: "6.5%",
   },
   titleTextField: {
     fontSize: "2em",
-    paddingLeft: "50px",
+  },
+  submitButton: {
+    position: "absolute",
+    right: "82%",
+    bottom: "10%",
+  },
+  progressSpinner: {
+    position: "absolute",
+  },
+  closeButton: {
+    position: "absolute",
+    left: "90%",
+    top: "10%",
+  },
+  pointReward: {
+    position: "relative",
+    left: "75%",
+    marginBottom: "10px",
+    width: "35%",
+    size: "small",
+  },
+  titleField: {
+    margin: "15px auto 15px auto",
+    width: "75%",
+    paddingRight: "2%",
+  },
+  numberField: {
+    margin: "15px auto 15px auto",
+    width: "23%",
+  },
+  formCard: {
+    ...theme.spreadIt.formCard,
+    padding: "40px 60px",
+  },
+  button: {
+    ...theme.spreadIt.button,
+    minWidth: "23%",
+    float: "right",
   },
 });
 
@@ -66,22 +114,66 @@ class PostBounty extends Component {
       UI: { loading },
     } = this.props;
     return (
-      <div className={classes.rootPadding}>
-        <Typography variant="h2" className={classes.pageTitle}>
-          Post a bounty!
-        </Typography>
-        <Card>
-          <TextField
-            id="bounty-title"
-            label="Title"
-            type="text"
-            variant="outlined"
-            InputProps={{ classes: { input: classes.titleTextField } }}
-          />
-          <br />
-          <TextField />
-        </Card>
-      </div>
+      <Card className={classes.formCard}>
+        <Grid container className={classes.form}>
+          <Grid item sm>
+            <Typography variant="h4" className={classes.pageTitle}>
+              Post a bounty
+            </Typography>
+            <img src={AppIcon} alt="hwbounty logo" className={classes.image} />{" "}
+            <br /> <br /> <br /> <br /> <br /> <br />
+            <TextField
+              id="title"
+              name="title"
+              type="title"
+              label="Title"
+              className={classes.titleField}
+              variant="outlined"
+            />
+            <TextField
+              id="standard-number"
+              id="points"
+              name="points"
+              type="number"
+              label="Points"
+              width="20%"
+              variant="outlined"
+              className={classes.numberField}
+            />{" "}
+            <br />
+            <TextField
+              id="outlined-multiline-static"
+              id="content"
+              name="content"
+              type="content"
+              label="Content"
+              multiline
+              rows={18}
+              defaultValue=""
+              variant="outlined"
+              fullWidth
+            />{" "}
+            <br />
+            {errors.general && (
+              <Typography variant="body2" className={classes.customError}>
+                {errors.general}
+              </Typography>
+            )}
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              disabled={loading}
+            >
+              Post
+              {loading && (
+                <CircularProgress className={classes.progress} size={30} />
+              )}
+            </Button>
+            <br />
+          </Grid>
+        </Grid>
+      </Card>
     );
   }
 }
