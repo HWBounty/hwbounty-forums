@@ -15,7 +15,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
-import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActionArea from "@material-ui/core/CardActionArea";
 import Avatar from "@material-ui/core/Avatar";
 import Chip from "@material-ui/core/Chip";
 
@@ -37,7 +37,7 @@ const styles = {
   },
   image: {
     maxWidth: 170,
-    float: 'left',
+    float: "left",
   },
   content: {
     padding: 25,
@@ -75,23 +75,24 @@ class Bounty extends Component {
       },
       user: {
         authenticated,
-        credentials: { handle },
+        credentials: { username },
       },
     } = this.props;
 
     const deleteButton =
-      authenticated && author.publicID === handle ? (
+      authenticated && author.publicID === username ? (
         <DeleteBounty bountyId={bountyID} />
       ) : null;
     return (
       <Card className={classes.card}>
-        <CardActionArea onClick={(e) => {this.props.history.push("/bountyview/" + bountyID)}}>
+        <CardActionArea
+          onClick={(e) => {
+            this.props.history.push("/bountyview/" + bountyID);
+          }}
+        >
           <CardContent className={classes.content}>
             <div style={{ display: "flex" }}>
-              <Avatar
-                src={author.pfp}
-                className={classes.avatar}
-              />
+              <Avatar src={author.pfp} className={classes.avatar} />
               <Typography
                 variant="h5"
                 component={Link}
@@ -112,18 +113,19 @@ class Bounty extends Component {
             <Typography variant="body1">
               {" "}
               {/*This is were to put the no wrap if needed...*/}
-              <h2>
-                {title}
-              </h2>
+              <h2>{title}</h2>
             </Typography>
             <Typography variant="body1" noWrap={true}>
               {" "}
               {/*This is were to put the no wrap if needed...*/}
               {description}
             </Typography>
-            {tags.split(",").map((l, i) => {
-                return(expandLabel(l)); 
-              }).map((l, i) => {
+            {tags
+              .split(",")
+              .map((l, i) => {
+                return expandLabel(l);
+              })
+              .map((l, i) => {
                 return (
                   <Chip
                     label={l[0]}

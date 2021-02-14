@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 // Components
 import Bounty from "../components/bounty/Bounty";
-import Profile from "../components/profile/Profile";
+//import Profile from "../components/profile/Profile";
 import BountyFilter from "../components/layout/BountyFilter";
 import BountySkeleton from "../util/BountySkeleton";
 
@@ -23,12 +23,12 @@ const styles = {
 
 function getQueryVariable(variable, querystring) {
   var query = querystring.substring(1);
-  var vars = query.split('&');
+  var vars = query.split("&");
   for (var i = 0; i < vars.length; i++) {
-      var pair = vars[i].split('=');
-      if (decodeURIComponent(pair[0]) == variable) {
-          return decodeURIComponent(pair[1]);
-      }
+    var pair = vars[i].split("=");
+    if (decodeURIComponent(pair[0]) == variable) {
+      return decodeURIComponent(pair[1]);
+    }
   }
 }
 
@@ -39,7 +39,11 @@ export class home extends Component {
 
   componentDidMount() {
     console.log(getQueryVariable("t", this.props.location.search));
-    this.props.getBounties((getQueryVariable("t", this.props.location.search) ? getQueryVariable("t", this.props.location.search) + "?0?time" : "all?0?time"));
+    this.props.getBounties(
+      getQueryVariable("t", this.props.location.search)
+        ? getQueryVariable("t", this.props.location.search) + "?0?time"
+        : "all?0?time"
+    );
   }
 
   render() {
@@ -59,9 +63,9 @@ export class home extends Component {
           <Grid item sm={8} xs={12}>
             {recentBountiesMarkup}
           </Grid>
-          <Grid item sm={4} xs={12}>
+          {/*<Grid item sm={4} xs={12}>
             <Profile />
-          </Grid>
+    </Grid>*/}
         </Grid>
       </div>
     );

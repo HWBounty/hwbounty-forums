@@ -46,6 +46,17 @@ export class signup extends Component {
       signupSuccess: false,
     };
   }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.UI.errors) {
+      this.setState({
+        errors: nextProps.UI.errors,
+      });
+    }
+    this.setState({
+      ...this.state,
+      signupSuccess: nextProps.user.signupSuccess,
+    });
+  }
   handleSubmit = (event) => {
     event.preventDefault();
     this.setState({
@@ -60,7 +71,6 @@ export class signup extends Component {
       lastName: this.state.lastName,
     };
     this.props.signupUser(newUserData, this.props.history);
-    console.log(this.state.errors);
   };
 
   handleNext = (event) => {
@@ -88,9 +98,12 @@ export class signup extends Component {
     const {
       classes,
       UI: { loading },
+      user,
     } = this.props;
     const { errors, userConfirmedEmail, signupSuccess } = this.state;
-
+    console.log(
+      "signup state is" + signupSuccess + " SLDF" + user.signupSuccess
+    );
     return (
       <Fragment>
         <Card className={classes.formCard}>
@@ -105,6 +118,7 @@ export class signup extends Component {
               <Typography variant="h2" className={classes.pageTitle}>
                 Signup
               </Typography>
+              {console.log(errors)}
               {!userConfirmedEmail ? (
                 <Fragment>
                   <form noValidate onSubmit={this.handleNext}>
@@ -162,9 +176,9 @@ export class signup extends Component {
                       type="text"
                       label="First Name"
                       className={classes.textField}
-                      error={errors.handle ? true : false}
+                      error={errors.firstName ? true : false}
                       value={this.state.firstName}
-                      value={this.state.handle}
+                      value={this.state.firstName}
                       onChange={this.handleChange}
                       fullWidth
                     />
@@ -174,9 +188,9 @@ export class signup extends Component {
                       type="text"
                       label="Last Name"
                       className={classes.textField}
-                      error={errors.handle ? true : false}
+                      error={errors.lastName ? true : false}
                       value={this.state.lastName}
-                      value={this.state.handle}
+                      value={this.state.lastName}
                       onChange={this.handleChange}
                       fullWidth
                     />
@@ -186,8 +200,8 @@ export class signup extends Component {
                       type="text"
                       label="Username"
                       className={classes.textField}
-                      helperText={errors.handle}
-                      error={errors.handle ? true : false}
+                      helperText={errors.username}
+                      error={errors.username ? true : false}
                       value={this.state.username}
                       onChange={this.handleChange}
                       fullWidth
@@ -270,11 +284,13 @@ signup.propTypes = {
   classes: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
   UI: PropTypes.object.isRequired,
+  signupSuccess: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
   user: state.user,
   UI: state.UI,
+  signupSuccess: state.signupSuccess,
 });
 
 export default connect(mapStateToProps, { signupUser })(
