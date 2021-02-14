@@ -146,7 +146,7 @@ export class bountyview extends Component {
               </Typography>
               <BountyReward
                 pointReward={this.state.bounty}
-               claimed={this.state.claimed}
+                claimed={this.state.claimed}
               />
             </CardContent> <br /> <br />
             <CardActions disableSpacing>
