@@ -1,15 +1,25 @@
+// React
 import React, { Component } from "react";
-import Grid from "@material-ui/core/Grid";
 import PropTypes from "prop-types";
 
+// Components
 import Bounty from "../components/bounty/Bounty";
 import Profile from "../components/profile/Profile";
 import BountyFilter from "../components/layout/BountyFilter";
-
 import BountySkeleton from "../util/BountySkeleton";
 
+// Styling
+import Grid from "@material-ui/core/Grid";
+import theme from "../util/theme";
+import { withStyles } from "@material-ui/core/styles";
+
+// Redux
 import { connect } from "react-redux";
-import { getBounties, getFakeBounties } from "../redux/actions/dataActions";
+import { getBounties } from "../redux/actions/dataActions";
+
+const styles = {
+  ...theme.spreadIt,
+};
 
 function getQueryVariable(variable, querystring) {
   var query = querystring.substring(1);
@@ -32,26 +42,28 @@ export class home extends Component {
     this.props.getBounties((getQueryVariable("t", this.props.location.search) ? getQueryVariable("t", this.props.location.search) + "?0?time" : "all?0?time"));
   }
 
-
   render() {
     const { bounties, loading } = this.props.data;
+    const { classes } = this.props;
     let recentBountiesMarkup = !loading ? (
       bounties.map((bounty) => <Bounty key={bounty.bountyID} bounty={bounty} />)
     ) : (
       <BountySkeleton />
     );
     return (
-      <Grid container spacing={8}>
-        <Grid item sm={12} xs={12} >
-          <BountyFilter />
+      <div className={classes.rootPadding}>
+        <Grid container spacing={8}>
+          <Grid item sm={12} xs={12}>
+            <BountyFilter />
+          </Grid>
+          <Grid item sm={8} xs={12}>
+            {recentBountiesMarkup}
+          </Grid>
+          <Grid item sm={4} xs={12}>
+            <Profile />
+          </Grid>
         </Grid>
-        <Grid item sm={8} xs={12}>
-          {recentBountiesMarkup}
-        </Grid>
-        <Grid item sm={4} xs={12}>
-          <Profile />
-        </Grid>
-      </Grid>
+      </div>
     );
   }
 }
@@ -66,4 +78,6 @@ const mapStateToProps = (state) => ({
   data: state.data,
 });
 
-export default connect(mapStateToProps, { getBounties, getFakeBounties })(home);
+export default connect(mapStateToProps, { getBounties })(
+  withStyles(styles)(home)
+);

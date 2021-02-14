@@ -23,6 +23,7 @@ import Home from "./pages/home";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
 import PageNotFound from "./pages/pagenotfound";
+import PostBounty from "./pages/postbounty";
 import BountyView from "./pages/bountyview";
 //import doath from "./pages/doath";
 
@@ -46,6 +47,7 @@ class App extends Component {
                 <Route exact path="/" component={Home} />
                 <Route path="/login" component={Login} />
                 <Route path="/signup" component={Signup} />
+                <Route path="/postbounty" component={PostBounty} />
                 <Route path="/bountyview/*" component={BountyView} />
                 <Route path="/vsuccess" component={null} />
                 <Route path="/doath*" component={null} />

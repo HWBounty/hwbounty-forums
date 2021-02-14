@@ -18,7 +18,7 @@ const rawTheme = createMuiTheme({
   spreadIt: {
     points: {
       color: "#2c387e",
-      fontType: 'bold',
+      fontType: "bold",
     },
     aboutBackground: {
       backgroundColor: "#CCCCCC",
@@ -31,6 +31,10 @@ const rawTheme = createMuiTheme({
       fontWeightRegular: 400, // Work Sans
       fontWeightMedium: 700, // Roboto Condensed
       fontFamilySecondary: "'Roboto Condensed', sans-serif",
+    },
+    rootPadding: {
+      marginLeft: "30px",
+      marginRight: "30px",
     },
     form: {
       textAlign: "center",
