@@ -12,7 +12,7 @@ import {
 const initialState = {
   authenticated: false,
   loading: false,
-  credentials: {},
+  info: {},
   likes: [],
   notifications: [],
   signupSuccess: false,
