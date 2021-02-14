@@ -62,7 +62,7 @@ class Bounty extends Component {
     const {
       classes,
       bounty: {
-        createdAt,
+        timestamp,
         bountyID,
         likeCount,
         commentCount,
@@ -108,7 +108,7 @@ class Bounty extends Component {
             </div>
             {deleteButton}
             <Typography variant="body2" color="textSecondary">
-              {dayjs(createdAt).fromNow()}
+              {dayjs(timestamp).fromNow()}
             </Typography>
             <Typography variant="body1">
               {" "}
