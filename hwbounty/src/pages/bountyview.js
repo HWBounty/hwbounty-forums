@@ -2,7 +2,6 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import AppIcon from "../images/favicon.ico";
-import { Link, withRouter } from "react-router-dom";
 
 //MUI Stuff
 import { withStyles } from "@material-ui/core/styles";
@@ -32,7 +31,7 @@ import BountyNotFound from "../components/bounty/BountyNotFound";
 const styles = (theme) => ({
   ...theme.spreadIt,
   root: {
-    maxWidth: 345,
+    maxWidth: "50%",
     textAlign: "left",
   },
   media: {
@@ -178,4 +177,4 @@ export class bountyview extends Component {
   }
 }
 
-export default withRouter(withStyles(styles)(bountyview));
+export default withStyles(styles)(bountyview);

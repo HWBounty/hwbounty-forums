@@ -39,8 +39,8 @@ const rawTheme = createMuiTheme({
       top: "50%",
       left: "50%",
       transform: "translate(-50%, -50%)",
-      height: "60%",
-      width: "40%",
+      width: "50%",
+      padding: "15px",
     },
     image: {
       margin: "20px auto 20px auto",

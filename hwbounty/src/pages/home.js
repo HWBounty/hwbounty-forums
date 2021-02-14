@@ -28,7 +28,7 @@ export class home extends Component {
     );
     return (
       <Grid container spacing={8}>
-        <Grid item sm={12} xs={12}>
+        <Grid item sm={12} xs={12} >
           <BountyFilter />
         </Grid>
         <Grid item sm={8} xs={12}>
