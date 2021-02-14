@@ -51,6 +51,12 @@ const styles = (theme) => ({
   childComment: {
     width: "95%",
     float: "right",
+    paddingLeft: 10,
+    paddingBottom: 5,
+  },
+  comment: {
+    paddingLeft: 10,
+    paddingBottom: 5,
   },
 });
 
@@ -112,6 +118,7 @@ export class bountyview extends Component {
               comments: res_obj.data,
             })
           : this.setState({ valid: false });
+        console.log(res_obj);
       });
   };
 
@@ -176,9 +183,9 @@ export class bountyview extends Component {
                   <br /> <br />
                   <CardActions disableSpacing>
                     <TextField
-                      name="title"
-                      type="title"
-                      label="Title"
+                      name="comment"
+                      type="comment"
+                      label="Comment"
                       className={classes.textField}
                       variant="outlined"
                       size="small"
@@ -194,17 +201,45 @@ export class bountyview extends Component {
                 <Grid item xs={12}>
                   <Card
                     className={
-                      c.parentCommentID != null ? classes.childComment : null
+                      (c.parentCommentID != null ? classes.childComment : classes.comment)
                     }
                   >
+                    <CardHeader
+                      avatar={
+                        <Avatar
+                          aria-label={c.user.publicID}
+                          src={c.user.pfp}
+                        />
+                      }
+                      title={"From: " + c.user.publicID}
+                      action={
+                        <IconButton className={classes.answerCheck}>
+                          <CheckIcon color="disable" />
+                        </IconButton>
+                      } />
+                    
                     {c.comment}{" "}
                     {c.edited > 0 ? (
                       <small style={{ color: "gray" }}>(edited)</small>
                     ) : null}
                     {c.parentCommentID != null ? null : (
-                      <IconButton className={classes.answerCheck}>
-                        <CheckIcon color="disable" />
-                      </IconButton>
+                      <span> <br />
+
+                        <CardActions disableSpacing>
+                        <TextField
+                          name="comment"
+                          type="comment"
+                          label="Comment"
+                          className={classes.textField}
+                          variant="outlined"
+                          size="small"
+                          fullWidth
+                        />
+                        <IconButton>
+                          <SendIcon color="primary" />
+                        </IconButton>
+                  </CardActions>
+                  </span>
                     )}
                   </Card>
                 </Grid>
