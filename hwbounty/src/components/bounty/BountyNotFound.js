@@ -2,15 +2,16 @@
 import React, { Component } from "react";
 
 // Styling
-import { Button, TextField } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 
-export class PageNotFound extends Component {
+export class BountyNotFound extends Component {
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <p>
-            <h1> 404 Page not found </h1>
+            <h1> Invalid bounty </h1> <br />
+            Maybe it was deleted or there was a typo.
           </p>
           <a className="App-link" href="/">
             <Button variant="outlined">Return to home</Button>
@@ -21,4 +22,4 @@ export class PageNotFound extends Component {
   }
 }
 
-export default PageNotFound;
+export default BountyNotFound;
