@@ -201,7 +201,7 @@ export class bountyview extends Component {
                         <TextField
                           name="comment"
                           type="text"
-                          label="Put you answer/comment here..."
+                          label="Put your answer/comment here..."
                           className={classes.textField}
                           variant="outlined"
                           size="small"
