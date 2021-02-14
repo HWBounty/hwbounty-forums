@@ -6,6 +6,7 @@ import {
   LIKE_BOUNTY,
   UNLIKE_BOUNTY,
   MARK_NOTIFICATIONS_READ,
+  CONFIRM_SIGNUP,
 } from "../types";
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
   credentials: {},
   likes: [],
   notifications: [],
+  signupSuccess: false,
 };
 
 export default function (state = initialState, action) {
@@ -58,6 +60,11 @@ export default function (state = initialState, action) {
       state.notifications.forEach((notif) => (notif.read = true));
       return {
         ...state,
+      };
+    case CONFIRM_SIGNUP:
+      return {
+        ...state,
+        signupSuccess: true,
       };
     default:
       return state;

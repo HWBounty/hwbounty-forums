@@ -4,7 +4,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import EditDetails from "./EditDetails";
-import TooltipButton from "../../util/TooltipButton";
+import MyButton from "../../util/MyButton";
 import ProfileSkeleton from "../../util/ProfileSkeleton";
 
 // MUI stuff
@@ -50,7 +50,7 @@ class Profile extends Component {
       classes,
       user: {
         credentials: {
-          username,
+          handle,
           createdAt,
           imageUrl,
           bio,
@@ -75,23 +75,23 @@ class Profile extends Component {
                 onChange={this.handleImageChange}
                 hidden="hidden"
               />
-              <TooltipButton
+              <MyButton
                 tip="Edit profile picture"
                 onClick={this.handleEditPicture}
                 btnClassName="button"
               >
                 <EditIcon color="primary" />
-              </TooltipButton>
+              </MyButton>
             </div>
             <hr />
             <div className="profile-details">
               <MuiLink
                 component={Link}
-                to={`/users/${username}`}
+                to={`/users/${handle}`}
                 color="primary"
                 variant="h5"
               >
-                @{username}
+                @{handle}
               </MuiLink>
               <hr />
               {bio && <Typography variant="body2">{bio}</Typography>}
@@ -117,9 +117,9 @@ class Profile extends Component {
               <CalendarToday color="primary" />{" "}
               <span>Joined {dayjs(createdAt).format("MMM YYYY")}</span>
             </div>
-            <TooltipButton tip="Logout" onClick={this.handleLogout}>
+            <MyButton tip="Logout" onClick={this.handleLogout}>
               <KeyboardReturn color="primary" />
-            </TooltipButton>
+            </MyButton>
             <EditDetails />
           </div>
         </Paper>

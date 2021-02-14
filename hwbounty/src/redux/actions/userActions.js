@@ -6,6 +6,7 @@ import {
   SET_UNAUTHENTICATED,
   LOADING_USER,
   MARK_NOTIFICATIONS_READ,
+  CONFIRM_SIGNUP,
 } from "../types";
 import axios from "axios";
 
@@ -39,21 +40,22 @@ export const signupUser = (newUserData, history) => (dispatch) => {
   axios
     .post("/signup", newUserData)
     .then((res) => {
-      setAuthorizationHeader(res.data.token);
-      dispatch(getUserData());
+      //setAuthorizationHeader(res.data.token);
+      //dispatch(getUserData());
       dispatch({ type: CLEAR_ERRORS });
-      history.push("/");
+      dispatch({ type: CONFIRM_SIGNUP });
+      //history.push("/");
     })
     .catch((err) => {
       dispatch({
         type: SET_ERRORS,
         payload: err.response.data,
       });
-      console.log(err.message);
+      console.log(err.response.data);
     });
 };
 
-export const getUserData = (token) => (dispatch) => {
+export const getUserData = () => (dispatch) => {
   dispatch({ type: LOADING_USER });
   axios
     .get("/@me")

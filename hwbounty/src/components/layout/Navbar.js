@@ -108,6 +108,7 @@ export class Navbar extends Component {
 
   render() {
     const { classes, authenticated } = this.props;
+
     return (
       <div className={classes.root}>
         <AppBar position="static">
