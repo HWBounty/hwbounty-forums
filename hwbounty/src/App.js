@@ -25,6 +25,7 @@ import Signup from "./pages/signup";
 import PageNotFound from "./pages/pagenotfound";
 import PostBounty from "./pages/postbounty";
 import BountyView from "./pages/bountyview";
+import ContactUs from "./pages/contactus";
 //import doath from "./pages/doath";
 
 import axios from "axios";
@@ -56,6 +57,7 @@ class App extends Component {
                 <Route path="/signup" component={Signup} />
                 <Route path="/postbounty" component={PostBounty} />
                 <Route path="/bountyview/*" component={BountyView} />
+                <Route path="/contactus" component={ContactUs} />
                 <Route path="/vsuccess" component={null} />
                 <Route path="/doath*" component={null} />
                 <Route path="*" component={PageNotFound} />
