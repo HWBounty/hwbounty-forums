@@ -21,6 +21,7 @@ import SearchIcon from "@material-ui/icons/Search";
 
 // Images
 import HWBountyLogo from "../../images/HWBounty-Logo.png";
+import { connect } from "react-redux";
 
 const styles = {
   ...theme.spreadIt,
@@ -87,16 +88,22 @@ const styles = {
   },
   profileImage: {
     borderRadius: "50%",
-    width: "40px",
+    width: "50px",
   },
 };
 
 export class Navbar extends Component {
-  search = (e) => {
-    if (e.key == "Enter") {
-      console.log("piss");
-      this.props.history.push("?q=" + e.target.value);
-    }
+  state = {
+    searchTerm: "",
+  };
+
+  handleSearch() {
+    this.props.history.push("?q=" + this.state.searchTerm);
+    console.log("hello");
+  }
+
+  handleChange = (event) => {
+    this.state.searchTerm = event.target.value;
   };
 
   render() {
@@ -119,7 +126,12 @@ export class Navbar extends Component {
               </Typography>
             </Button>
             <div className={classes.emptySpace} />
-            <div className={classes.search}>
+            <form
+              className={classes.search}
+              noValidate
+              autoComplete="off"
+              onSubmit={this.handleSearch}
+            >
               <div className={classes.searchIcon}>
                 <SearchIcon />
               </div>
@@ -131,18 +143,23 @@ export class Navbar extends Component {
                   input: classes.inputInput,
                 }}
                 inputProps={{ "aria-label": "search" }}
-                onKeyDown={this.search}
+                onChange={this.handleChange}
               />
-            </div>
-            <Button
-              className={classes.button}
-              href={authenticated ? "/" : "/login"}
-            >
-              {authenticated ? <img src={HWBountyLogo} /> : "Login"}
-            </Button>
-            {authenticated ? null : <Button className={classes.button} href="/signup">
-              Signup
-            </Button>}
+            </form>
+            {authenticated ? (
+              <IconButton>
+                <img src={HWBountyLogo} className={classes.profileImage} />
+              </IconButton>
+            ) : (
+              <Fragment>
+                <Button className={classes.button} href="/login">
+                  Login
+                </Button>{" "}
+                <Button className={classes.button} href="/signup">
+                  Signup
+                </Button>
+              </Fragment>
+            )}
           </Toolbar>
         </AppBar>
       </div>
@@ -154,4 +171,8 @@ Navbar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withRouter(withStyles(styles)(Navbar));
+const mapStateToProps = (state) => ({
+  authenticated: state.user.authenticated,
+});
+
+export default connect(mapStateToProps)(withRouter(withStyles(styles)(Navbar)));

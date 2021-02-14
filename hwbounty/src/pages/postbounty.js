@@ -10,6 +10,7 @@ import { postBounty } from "../redux/actions/dataActions";
 // MUI stuff
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import Card from "@material-ui/core/Card";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -25,26 +26,7 @@ const styles = (theme) => ({
   },
   titleTextField: {
     fontSize: "2em",
-  },
-  submitButton: {
-    position: "absolute",
-    right: "82%",
-    bottom: "10%",
-  },
-  progressSpinner: {
-    position: "absolute",
-  },
-  closeButton: {
-    position: "absolute",
-    left: "90%",
-    top: "10%",
-  },
-  pointReward: {
-    position: "relative",
-    left: "75%",
-    marginBottom: "10px",
-    width: "25%",
-    size: "small",
+    paddingLeft: "50px",
   },
 });
 
@@ -88,13 +70,17 @@ class PostBounty extends Component {
         <Typography variant="h2" className={classes.pageTitle}>
           Post a bounty!
         </Typography>
-        <TextField
-          id="bounty-title"
-          label="Title"
-          type="text"
-          variant="outlined"
-          InputProps={{ classes: { input: classes.titleTextField } }}
-        />
+        <Card>
+          <TextField
+            id="bounty-title"
+            label="Title"
+            type="text"
+            variant="outlined"
+            InputProps={{ classes: { input: classes.titleTextField } }}
+          />
+          <br />
+          <TextField />
+        </Card>
       </div>
     );
   }

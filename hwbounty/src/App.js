@@ -32,6 +32,12 @@ import axios from "axios";
 const theme = createMuiTheme(themeFile);
 
 axios.defaults.baseURL = "https://api.hwbounty.help";
+const token = localStorage.FBIdToken;
+if (token) {
+  store.dispatch({ type: SET_AUTHENTICATED });
+  axios.defaults.headers.common["Authorization"] = token;
+  store.dispatch(getUserData());
+}
 
 class App extends Component {
   render() {

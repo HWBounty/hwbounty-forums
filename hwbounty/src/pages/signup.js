@@ -12,6 +12,9 @@ import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
 import withStyles from "@material-ui/core/styles/withStyles";
 
 // Requests
@@ -40,6 +43,7 @@ export class signup extends Component {
       lastName: "",
       errors: {},
       userConfirmedEmail: false,
+      signupSuccess: false,
     };
   }
   handleSubmit = (event) => {
@@ -56,6 +60,7 @@ export class signup extends Component {
       lastName: this.state.lastName,
     };
     this.props.signupUser(newUserData, this.props.history);
+    console.log(this.state.errors);
   };
 
   handleNext = (event) => {
@@ -84,154 +89,179 @@ export class signup extends Component {
       classes,
       UI: { loading },
     } = this.props;
-    const { errors, userConfirmedEmail } = this.state;
-    return (
-      <Card className={classes.formCard}>
-        <Grid container className={classes.form}>
-          <Grid item xs={3} />
-          <Grid item sm>
-            <img src={AppIcon} alt="hwbounty logo" className={classes.image} />
-            <Typography variant="h2" className={classes.pageTitle}>
-              Signup
-            </Typography>
-            {!userConfirmedEmail ? (
-              <Fragment>
-                <form noValidate onSubmit={this.handleNext}>
-                  <TextField
-                    id="email"
-                    name="email"
-                    type="email"
-                    label="Email"
-                    className={classes.textField}
-                    helperText={errors.email}
-                    error={errors.email ? true : false}
-                    value={this.state.email}
-                    onChange={this.handleChange}
-                    fullWidth
-                  />
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    className={classes.button}
-                    disabled={loading}
-                    onClick={this.handleNext}
-                  >
-                    Next
-                  </Button>
-                </form>
+    const { errors, userConfirmedEmail, signupSuccess } = this.state;
 
-                <Button variant="contained" className={classes.button} href="https://discord.com/api/oauth2/authorize?client_id=810033129452601364&redirect_uri=https%3A%2F%2Fhwbounty.help%2Fdoauth&response_type=token&scope=email%20identify">
-                  Sign in with Discord
-                </Button>
-                <br />
-                <Button variant="contained" className={classes.button}>
-                  Sign in with Google
-                </Button>
-              </Fragment>
-            ) : (
-              <Fragment>
-                <form noValidate onSubmit={this.handleSubmit}>
-                  <TextField
-                    id="email"
-                    name="email"
-                    type="email"
-                    label="Email"
-                    className={classes.textField}
-                    value={this.state.email}
-                    fullWidth
-                    disabled={true}
-                  />
-                  <TextField
-                    id="firstName"
-                    name="firstName"
-                    type="text"
-                    label="First Name"
-                    className={classes.textField}
-                    error={errors.handle ? true : false}
-                    value={this.state.firstName}
-                    value={this.state.handle}
-                    onChange={this.handleChange}
-                    fullWidth
-                  />
-                  <TextField
-                    id="lastName"
-                    name="lastName"
-                    type="text"
-                    label="Last Name"
-                    className={classes.textField}
-                    error={errors.handle ? true : false}
-                    value={this.state.lastName}
-                    value={this.state.handle}
-                    onChange={this.handleChange}
-                    fullWidth
-                  />
-                  <TextField
-                    id="username"
-                    name="username"
-                    type="text"
-                    label="Username"
-                    className={classes.textField}
-                    helperText={errors.handle}
-                    error={errors.handle ? true : false}
-                    value={this.state.username}
-                    onChange={this.handleChange}
-                    fullWidth
-                  />
-                  <TextField
-                    id="password"
-                    name="password"
-                    type="password"
-                    label="Password"
-                    className={classes.textField}
-                    helperText={errors.password}
-                    error={errors.password ? true : false}
-                    value={this.state.password}
-                    onChange={this.handleChange}
-                    fullWidth
-                  />
-                  <TextField
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    type="password"
-                    label="Confirm Password"
-                    className={classes.textField}
-                    helperText={errors.confirmPassword}
-                    error={errors.confirmPassword ? true : false}
-                    value={this.state.confirmPassword}
-                    onChange={this.handleChange}
-                    fullWidth
-                  />
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    className={classes.button}
-                    disabled={loading}
-                  >
-                    Signup
-                    {loading && (
-                      <CircularProgress
-                        className={classes.progress}
-                        size={30}
-                      />
-                    )}
-                  </Button>
-                </form>
-              </Fragment>
-            )}
-            {errors.general && (
-              <Typography variant="body2" className={classes.customError}>
-                {errors.general}
+    return (
+      <Fragment>
+        <Card className={classes.formCard}>
+          <Grid container className={classes.form}>
+            <Grid item xs={3} />
+            <Grid item sm>
+              <img
+                src={AppIcon}
+                alt="hwbounty logo"
+                className={classes.image}
+              />
+              <Typography variant="h2" className={classes.pageTitle}>
+                Signup
               </Typography>
-            )}
-            <br />
-            <small>
-              Already have an account ? login <Link to="/login">here</Link>
-            </small>
+              {!userConfirmedEmail ? (
+                <Fragment>
+                  <form noValidate onSubmit={this.handleNext}>
+                    <TextField
+                      id="email"
+                      name="email"
+                      type="email"
+                      label="Email"
+                      className={classes.textField}
+                      helperText={errors.email}
+                      error={errors.email ? true : false}
+                      value={this.state.email}
+                      onChange={this.handleChange}
+                      fullWidth
+                    />
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      className={classes.button}
+                      disabled={loading}
+                      onClick={this.handleNext}
+                    >
+                      Next
+                    </Button>
+                  </form>
+
+                  <Button
+                    variant="contained"
+                    className={classes.button}
+                    href="https://discord.com/api/oauth2/authorize?client_id=810033129452601364&redirect_uri=https%3A%2F%2Fhwbounty.help%2Fdoauth&response_type=token&scope=email%20identify"
+                  >
+                    Sign in with Discord
+                  </Button>
+                  <br />
+                  <Button variant="contained" className={classes.button}>
+                    Sign in with Google
+                  </Button>
+                </Fragment>
+              ) : (
+                <Fragment>
+                  <form noValidate onSubmit={this.handleSubmit}>
+                    <TextField
+                      id="email"
+                      name="email"
+                      type="email"
+                      label="Email"
+                      className={classes.textField}
+                      value={this.state.email}
+                      fullWidth
+                      disabled={true}
+                    />
+                    <TextField
+                      id="firstName"
+                      name="firstName"
+                      type="text"
+                      label="First Name"
+                      className={classes.textField}
+                      error={errors.handle ? true : false}
+                      value={this.state.firstName}
+                      value={this.state.handle}
+                      onChange={this.handleChange}
+                      fullWidth
+                    />
+                    <TextField
+                      id="lastName"
+                      name="lastName"
+                      type="text"
+                      label="Last Name"
+                      className={classes.textField}
+                      error={errors.handle ? true : false}
+                      value={this.state.lastName}
+                      value={this.state.handle}
+                      onChange={this.handleChange}
+                      fullWidth
+                    />
+                    <TextField
+                      id="username"
+                      name="username"
+                      type="text"
+                      label="Username"
+                      className={classes.textField}
+                      helperText={errors.handle}
+                      error={errors.handle ? true : false}
+                      value={this.state.username}
+                      onChange={this.handleChange}
+                      fullWidth
+                    />
+                    <TextField
+                      id="password"
+                      name="password"
+                      type="password"
+                      label="Password"
+                      className={classes.textField}
+                      helperText={errors.password}
+                      error={errors.password ? true : false}
+                      value={this.state.password}
+                      onChange={this.handleChange}
+                      fullWidth
+                    />
+                    <TextField
+                      id="confirmPassword"
+                      name="confirmPassword"
+                      type="password"
+                      label="Confirm Password"
+                      className={classes.textField}
+                      helperText={errors.confirmPassword}
+                      error={errors.confirmPassword ? true : false}
+                      value={this.state.confirmPassword}
+                      onChange={this.handleChange}
+                      fullWidth
+                    />
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="primary"
+                      className={classes.button}
+                      disabled={loading}
+                    >
+                      Signup
+                      {loading && (
+                        <CircularProgress
+                          className={classes.progress}
+                          size={30}
+                        />
+                      )}
+                    </Button>
+                  </form>
+                </Fragment>
+              )}
+              {errors.general && (
+                <Typography variant="body2" className={classes.customError}>
+                  {errors.general}
+                </Typography>
+              )}
+              <br />
+              <small>
+                Already have an account ? login <Link to="/login">here</Link>
+              </small>
+            </Grid>
+            <Grid item xs={3} />
           </Grid>
-          <Grid item xs={3} />
-        </Grid>
-      </Card>
+        </Card>
+        <Dialog open={signupSuccess}>
+          <DialogTitle id="signup-verification-prompt">
+            Signup Success!
+          </DialogTitle>
+          <DialogContent dividers>
+            <Typography gutterBottom>
+              Thanks for signing up! In order to make sure you not a bot, we
+              sent you a verification email. You may close this tab{" "}
+              <Link to="oops, we are still working on this">
+                Click to resend the link
+              </Link>
+            </Typography>
+          </DialogContent>
+        </Dialog>
+      </Fragment>
     );
   }
 }
