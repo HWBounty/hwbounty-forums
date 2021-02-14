@@ -16,12 +16,18 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import CardActionArea from '@material-ui/core/CardActionArea';
+import Avatar from "@material-ui/core/Avatar";
+import Chip from "@material-ui/core/Chip";
 
 //Icons
 import ChatIcon from "@material-ui/icons/Chat";
 
 // Redux
 import { connect } from "react-redux";
+
+// Labels
+import expandLabel from "../../util/expandLabel";
+import { compactLabel } from "../../util/expandLabel";
 
 const styles = {
   card: {
@@ -30,13 +36,21 @@ const styles = {
     marginBottom: 20,
   },
   image: {
-    minWidth: 200,
+    maxWidth: 170,
+    float: 'left',
   },
   content: {
     padding: 25,
     objectFit: "cover",
   },
   pointBounty: {},
+  avatar: {
+    width: 25,
+    height: 25,
+  },
+  username: {
+    paddingLeft: 10,
+  },
 };
 
 class Bounty extends Component {
@@ -45,15 +59,16 @@ class Bounty extends Component {
     const {
       classes,
       bounty: {
-        body,
         createdAt,
-        userImage,
-        userHandle,
-        bountyId,
+        bountyID,
         likeCount,
         commentCount,
-        pointReward,
+        points,
         claimed,
+        author,
+        title,
+        description,
+        tags,
       },
       user: {
         authenticated,
@@ -62,28 +77,28 @@ class Bounty extends Component {
     } = this.props;
 
     const deleteButton =
-      authenticated && userHandle === handle ? (
-        <DeleteBounty bountyId={bountyId} />
+      authenticated && author.publicID === handle ? (
+        <DeleteBounty bountyId={bountyID} />
       ) : null;
     return (
       <Card className={classes.card}>
-        <CardActionArea onClick={(e) => {this.props.history.push("/bountyview/" + bountyId)}}>
-          <CardMedia
-            image={userImage}
-            title="Profile image"
-            className={classes.image}
-          />
+        <CardActionArea onClick={(e) => {this.props.history.push("/bountyview/" + bountyID)}}>
           <CardContent className={classes.content}>
             <div style={{ display: "flex" }}>
+              <Avatar
+                src={author.pfp}
+                className={classes.avatar}
+              />
               <Typography
                 variant="h5"
                 component={Link}
-                to={`/users/${userHandle}`}
+                to={`/users/${author.publicID}`}
                 color="primary"
+                className={classes.username}
               >
-                {userHandle}
+                {author.publicID}
               </Typography>
-              <BountyReward pointReward={pointReward} claimed={claimed} />
+              <BountyReward pointReward={points} claimed={claimed} />
             </div>
             {deleteButton}
             <Typography variant="body2" color="textSecondary">
@@ -92,17 +107,37 @@ class Bounty extends Component {
             <Typography variant="body1">
               {" "}
               {/*This is were to put the no wrap if needed...*/}
-              {body}
+              <h2>
+                {title}
+              </h2>
             </Typography>
-            <LikeButton bountyId={bountyId} />
+            <Typography variant="body1" noWrap={true}>
+              {" "}
+              {/*This is were to put the no wrap if needed...*/}
+              {description}
+            </Typography>
+            {tags.split(",").map((l, i) => {
+                return(expandLabel(l)); 
+              }).map((l, i) => {
+                return (
+                  <Chip
+                    label={l[0]}
+                    style={l[1]}
+                    component="a"
+                    href={"/?t=" + compactLabel(l[0])}
+                    clickable
+                  />
+                );
+              })}
+            <LikeButton bountyId={bountyID} />
             <span>{likeCount} Likes</span>
             <TooltipButton tip="comments">
               <ChatIcon color="primary" />
             </TooltipButton>
             <span>{commentCount} Comments</span>
             <BountyDialog
-              bountyId={bountyId}
-              userHandle={userHandle}
+              bountyId={bountyID}
+              userHandle={author.publicID}
               openDialog={this.props.openDialog}
             />
           </CardContent>

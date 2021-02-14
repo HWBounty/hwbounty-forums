@@ -17,7 +17,8 @@ const rawTheme = createMuiTheme({
   },
   spreadIt: {
     points: {
-      color: "#FFD700",
+      color: "#2c387e",
+      fontType: 'bold',
     },
     aboutBackground: {
       backgroundColor: "#CCCCCC",

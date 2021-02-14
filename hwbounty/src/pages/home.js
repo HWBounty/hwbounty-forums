@@ -17,12 +17,14 @@ export class home extends Component {
   };
 
   componentDidMount() {
-    this.props.getFakeBounties();
+    this.props.getBounties();
   }
+
+
   render() {
     const { bounties, loading } = this.props.data;
     let recentBountiesMarkup = !loading ? (
-      bounties.map((bounty) => <Bounty key={bounty.bountyId} bounty={bounty} />)
+      bounties.map((bounty) => <Bounty key={bounty.bountyID} bounty={bounty} />)
     ) : (
       <BountySkeleton />
     );

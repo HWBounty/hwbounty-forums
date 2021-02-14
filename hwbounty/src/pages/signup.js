@@ -120,7 +120,7 @@ export class signup extends Component {
                   </Button>
                 </form>
 
-                <Button variant="contained" className={classes.button}>
+                <Button variant="contained" className={classes.button} href="https://discord.com/api/oauth2/authorize?client_id=810033129452601364&redirect_uri=https%3A%2F%2Fhwbounty.help%2Fdoauth&response_type=token&scope=email%20identify">
                   Sign in with Discord
                 </Button>
                 <br />

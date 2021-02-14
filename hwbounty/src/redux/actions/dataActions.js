@@ -18,7 +18,7 @@ import axios from "axios";
 export const getBounties = () => (dispatch) => {
   dispatch({ type: LOADING_DATA });
   axios
-    .get("/bounties")
+    .get("/fetchbounties/all?0?time")
     .then((res) => {
       dispatch({
         type: SET_BOUNTIES,
