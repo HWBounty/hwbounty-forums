@@ -2,7 +2,12 @@ import "./App.css";
 
 // React
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 
 //Redux
 import { Provider } from "react-redux";
@@ -60,6 +65,11 @@ class App extends Component {
                 <Route path="/contactus" component={ContactUs} />
                 <Route path="/vsuccess" component={null} />
                 <Route path="/doath*" component={null} />
+                <Route
+                  path="/signupcallback/*"
+                  component={() => <Redirect to="/login" />}
+                />{" "}
+                {/*todo login on callback*/}
                 <Route path="*" component={PageNotFound} />
               </Switch>
             </Router>
