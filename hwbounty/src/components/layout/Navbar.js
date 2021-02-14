@@ -1,6 +1,6 @@
 // React
 import React, { Component, Fragment } from "react";
-import { Redirect, withRouter } from "react-router-dom";
+import { Redirect, withRouter, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 // Styling
@@ -152,10 +152,14 @@ export class Navbar extends Component {
               </IconButton>
             ) : (
               <Fragment>
-                <Button className={classes.button} href="/login">
+                <Button className={classes.button} component={Link} to="/login">
                   Login
                 </Button>{" "}
-                <Button className={classes.button} href="/signup">
+                <Button
+                  className={classes.button}
+                  component={Link}
+                  to="/signup"
+                >
                   Signup
                 </Button>
               </Fragment>

@@ -17,7 +17,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import LikeButton from "../components/bounty/LikeButton";
 import BountyReward from "../components/bounty/BountyReward";
 import Chip from "@material-ui/core/Chip";
-import SendIcon from '@material-ui/icons/Send';
+import SendIcon from "@material-ui/icons/Send";
 import TextField from "@material-ui/core/TextField";
 
 // Requests
@@ -96,13 +96,11 @@ export class bountyview extends Component {
   };
 
   render() {
-    const {
-      classes
-    } = this.props;
+    const { classes } = this.props;
     const { valid } = this.state;
 
     return (
-      <span>
+      <div className={classes.rootPadding}>
         {valid ? (
           <Card className={classes.root}>
             <CardHeader
@@ -148,7 +146,8 @@ export class bountyview extends Component {
                 pointReward={this.state.bounty}
                 claimed={this.state.claimed}
               />
-            </CardContent> <br /> <br />
+            </CardContent>{" "}
+            <br /> <br />
             <CardActions disableSpacing>
               <TextField
                 id="title"
@@ -165,11 +164,10 @@ export class bountyview extends Component {
               </IconButton>
             </CardActions>
           </Card>
-
         ) : (
           <BountyNotFound />
         )}
-      </span>
+      </div>
     );
   }
 }

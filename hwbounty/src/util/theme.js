@@ -35,6 +35,7 @@ const rawTheme = createMuiTheme({
     rootPadding: {
       marginLeft: "30px",
       marginRight: "30px",
+      marginTop: "30px",
     },
     form: {
       textAlign: "center",
