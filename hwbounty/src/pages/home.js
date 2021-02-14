@@ -17,7 +17,7 @@ export class home extends Component {
   };
 
   componentDidMount() {
-    this.props.getFakeBounties();
+    this.props.getFakeBounties(); // TODO: TURN INTO GET REAL BOUNTIES
   }
   render() {
     const { bounties, loading } = this.props.data;
