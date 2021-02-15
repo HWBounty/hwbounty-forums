@@ -130,11 +130,18 @@ export class bountyview extends Component {
   handleCommentChanged = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
+  
 
   handleCommentSubmit = (event) => {
     event.preventDefault();
     this.props.submitComment(this.state.id, { comment: this.state.comment });
-    window.location.reload();
+      window.location.reload();
+  };
+
+  handleCommentReplySubmit = (parentID, event) => {
+    event.preventDefault();
+    this.props.submitComment(this.state.id, { comment: this.state.comment, parentID: parentID });
+      window.location.reload();
   };
 
   render() {
@@ -196,7 +203,7 @@ export class bountyview extends Component {
                     />
                   </CardContent>{" "}
                   <br /> <br />
-                  <form onSubmit={this.handleCommentSubmit}>
+                  <form onSubmit={this.handleCommentReplySubmit}>
                     <CardActions disableSpacing>
                         <TextField
                           name="comment"
