@@ -55,6 +55,12 @@ const styles = (theme) => ({
   childComment: {
     width: "95%",
     float: "right",
+    paddingLeft: 10,
+    paddingBottom: 5,
+  },
+  comment: {
+    paddingLeft: 10,
+    paddingBottom: 5,
   },
 });
 
@@ -117,6 +123,7 @@ export class bountyview extends Component {
               comments: res_obj.data,
             })
           : this.setState({ valid: false });
+        console.log(res_obj);
       });
   };
 
@@ -127,6 +134,13 @@ export class bountyview extends Component {
   handleCommentSubmit = (event) => {
     event.preventDefault();
     this.props.submitComment(this.state.id, { comment: this.state.comment });
+  };
+
+  handleCommentReplySubmit = (parentID, event) => {
+    this.props.submitComment(this.state.id, {
+      comment: this.state.comment,
+      parentID: parentID,
+    });
   };
 
   render() {
@@ -188,12 +202,12 @@ export class bountyview extends Component {
                     />
                   </CardContent>{" "}
                   <br /> <br />
-                  <CardActions disableSpacing>
-                    <form onSubmit={this.handleCommentSubmit}>
+                  <form onSubmit={this.handleCommentSubmit}>
+                    <CardActions disableSpacing>
                       <TextField
                         name="comment"
                         type="text"
-                        label="Put you answer/comment here..."
+                        label="Put your answer/comment here..."
                         className={classes.textField}
                         variant="outlined"
                         size="small"
@@ -204,25 +218,55 @@ export class bountyview extends Component {
                       <IconButton type="submit">
                         <SendIcon color="primary" />
                       </IconButton>
-                    </form>
-                  </CardActions>
+                    </CardActions>
+                  </form>
                 </Card>
               </Grid>
               {this.state.comments.map((c, i) => (
                 <Grid item xs={12}>
                   <Card
                     className={
-                      c.parentCommentID != null ? classes.childComment : null
+                      c.parentCommentID != null
+                        ? classes.childComment
+                        : classes.comment
                     }
                   >
+                    <CardHeader
+                      avatar={
+                        <Avatar aria-label={c.user.publicID} src={c.user.pfp} />
+                      }
+                      title={"From: " + c.user.publicID}
+                      action={
+                        c.parentCommentID === null ? (
+                          <IconButton className={classes.answerCheck}>
+                            <CheckIcon color="disable" />
+                          </IconButton>
+                        ) : null
+                      }
+                    />
                     {c.comment}{" "}
                     {c.edited > 0 ? (
                       <small style={{ color: "gray" }}>(edited)</small>
                     ) : null}
                     {c.parentCommentID != null ? null : (
-                      <IconButton className={classes.answerCheck}>
-                        <CheckIcon color="disable" />
-                      </IconButton>
+                      <span>
+                        {" "}
+                        <br />
+                        <CardActions disableSpacing>
+                          <TextField
+                            name="reply"
+                            type="reply"
+                            label="Reply"
+                            className={classes.textField}
+                            variant="outlined"
+                            size="small"
+                            fullWidth
+                          />
+                          <IconButton>
+                            <SendIcon color="primary" />
+                          </IconButton>
+                        </CardActions>
+                      </span>
                     )}
                   </Card>
                 </Grid>

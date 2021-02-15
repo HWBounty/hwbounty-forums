@@ -136,12 +136,6 @@ class Bounty extends Component {
                   />
                 );
               })}
-            <LikeButton bountyId={bountyID} />
-            <span>{likeCount} Likes</span>
-            <TooltipButton tip="comments">
-              <ChatIcon color="primary" />
-            </TooltipButton>
-            <span>{commentCount} Comments</span>
             <BountyDialog
               bountyId={bountyID}
               userHandle={author.publicID}

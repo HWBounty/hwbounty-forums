@@ -165,7 +165,6 @@ export class signup extends Component {
                       className={classes.textField}
                       value={this.state.email}
                       fullWidth
-                      disabled={true}
                     />
                     <TextField
                       id="firstName"

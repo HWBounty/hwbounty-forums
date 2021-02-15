@@ -65,11 +65,7 @@ export class home extends Component {
           <Grid item sm={8} xs={12}>
             {recentBountiesMarkup}
           </Grid>
-          <Grid item sm={12} xs={12}>
-            <Button component={Link} to="/postbounty">
-              Post
-            </Button>
-          </Grid>
+          
           {/*<Grid item sm={4} xs={12}>
             <Profile />
     </Grid>*/}

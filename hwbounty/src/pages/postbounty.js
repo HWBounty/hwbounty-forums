@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import TooltipButton from "../util/TooltipButton";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import AppIcon from "../images/HWBounty-Logo.png";
 
 // Redux stuff
@@ -21,6 +21,9 @@ import CloseIcon from "@material-ui/icons/Close";
 import { Typography } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import Grid from "@material-ui/core/Grid";
+import Autocomplete from '@material-ui/lab/Autocomplete';
+
+import { compactLabel, labels } from "../util/expandLabel"
 
 const styles = (theme) => ({
   ...theme.spreadIt,
@@ -84,7 +87,10 @@ class PostBounty extends Component {
     body: "",
     points: 0,
     ppoints: 0,
-    errors: {},
+    tags: "",
+    errors: {
+      tags: "You need at least one tag."
+    },
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.UI.errors) {
@@ -101,13 +107,39 @@ class PostBounty extends Component {
   handleTextChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
+  handleTagChange = (event, value) => {
+      if (value.length == 0) {
+        this.setState({
+          ...this.state,
+          errors: {
+            ...this.state.errors,
+            tags: "You need at least one tag.",
+          },
+        })
+        return;
+      }
+      console.log(value.map((i, e) => compactLabel(i.title)).join(","));
+      this.setState({
+        ...this.state,
+        tags: value.map((i, e) => compactLabel(i.title)).join(","),
+        errors: {
+          ...this.state.errors,
+          tags: null,
+        },
+        })
+  }
   handleSubmit = (event) => {
+    if (this.state.errors.tags != null) {
+      return;
+    }
+
     event.preventDefault();
     this.props.postBounty({
       title: this.state.title,
       body: this.state.body,
       points: this.state.points,
       ppoints: this.state.ppoints,
+      tags: this.state.tags,
     });
   };
   render() {
@@ -167,8 +199,28 @@ class PostBounty extends Component {
               onChange={this.handleTextChange}
               error={errors.body ? true : false}
               helperText={errors.body}
+              style={{paddingBottom: "2%"}}
               fullWidth
             />{" "}
+            <Autocomplete
+              multiple
+              id="tags-outlined"
+              options={labels.map((i, e) => {
+                return({ title: i });
+              })}
+              getOptionLabel={(option) => option.title}
+              filterSelectedOptions
+              onChange={this.handleTagChange}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  variant="outlined"
+                  label="Tags"
+                  error={errors.tags ? true : false}
+                  helperText={errors.tags}
+                />
+              )}
+            />
             <br />
             {errors.general && (
               <Typography variant="body2" className={classes.customError}>
@@ -204,6 +256,6 @@ const mapStateToProps = (state) => ({
   UI: state.UI,
 });
 
-export default connect(mapStateToProps, { postBounty })(
+export default withRouter(connect(mapStateToProps, { postBounty })(
   withStyles(styles)(PostBounty)
-);
+));
