@@ -64,7 +64,7 @@ export const postBounty = (newBounty) => (dispatch) => {
       console.log("errors");
       dispatch({
         type: SET_ERRORS,
-        payload: err.response.data,
+        payload: err.response,
       });
     });
 };

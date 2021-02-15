@@ -27,3 +27,14 @@ export default function expandLabel(label){
 export function compactLabel(label){
     return (reverseLabels[label] ? reverseLabels[label] : "invalid")
 }
+
+export const labels = [
+    "Japanese",
+    "Spanish",
+    "English",
+    "Math",
+    "Computer Science",
+    "Chinese",
+    "History",
+    "Science",
+]

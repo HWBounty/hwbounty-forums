@@ -232,9 +232,9 @@ export class bountyview extends Component {
                       }
                       title={"From: " + c.user.publicID}
                       action={
-                        <IconButton className={classes.answerCheck}>
+                        (c.parentCommentID === null ? <IconButton className={classes.answerCheck}>
                           <CheckIcon color="disable" />
-                        </IconButton>
+                        </IconButton> : null)
                       } />
                     
                     {c.comment}{" "}
@@ -246,9 +246,9 @@ export class bountyview extends Component {
 
                         <CardActions disableSpacing>
                         <TextField
-                          name="comment"
-                          type="comment"
-                          label="Comment"
+                          name="reply"
+                          type="reply"
+                          label="Reply"
                           className={classes.textField}
                           variant="outlined"
                           size="small"

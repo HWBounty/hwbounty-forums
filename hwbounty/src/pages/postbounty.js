@@ -21,8 +21,9 @@ import CloseIcon from "@material-ui/icons/Close";
 import { Typography } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import Grid from "@material-ui/core/Grid";
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
-import expandLabel from "../util/expandLabel"
+import { compactLabel, labels } from "../util/expandLabel"
 
 const styles = (theme) => ({
   ...theme.spreadIt,
@@ -87,7 +88,9 @@ class PostBounty extends Component {
     points: 0,
     ppoints: 0,
     tags: "",
-    errors: {},
+    errors: {
+      tags: "You need at least one tag."
+    },
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.UI.errors) {
@@ -104,35 +107,32 @@ class PostBounty extends Component {
   handleTextChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
-  handleTagChange = (event) => {
-    this.setState({
-      ...this.state,
-      errors: {
-        ...this.state.errors,
-        tags: null,
-      },
-    })
-    event.target.value.split(", ").map((i, e) => expandLabel(i)).map((i, e) => {
-      
-      if (i[0] == "invalid"){ 
+  handleTagChange = (event, value) => {
+      if (value.length == 0) {
+        this.setState({
+          ...this.state,
+          errors: {
+            ...this.state.errors,
+            tags: "You need at least one tag.",
+          },
+        })
+        return;
+      }
+      console.log(value.map((i, e) => compactLabel(i.title)).join(","));
       this.setState({
         ...this.state,
+        tags: value.map((i, e) => compactLabel(i.title)).join(","),
         errors: {
           ...this.state.errors,
-          tags: "Invalid tag(s)",
+          tags: null,
         },
-      }) 
-     } });
-    if (this.state.errors.tags)
-    {
-      return;
-    }
-    this.setState({
-      ...this.state,
-      tags: event.target.value.replace(/\s/g, "")
-    })
+        })
   }
   handleSubmit = (event) => {
+    if (this.state.errors.tags != null) {
+      return;
+    }
+
     event.preventDefault();
     this.props.postBounty({
       title: this.state.title,
@@ -202,15 +202,24 @@ class PostBounty extends Component {
               style={{paddingBottom: "2%"}}
               fullWidth
             />{" "}
-            <TextField
-              name="tags"
-              type="tags"
-              label="Tags (seperated by a comma then a space)"
-              fullWidth
-              error={errors.tags ? true : false}
-                helperText={errors.tags}
-              variant="outlined"
+            <Autocomplete
+              multiple
+              id="tags-outlined"
+              options={labels.map((i, e) => {
+                return({ title: i });
+              })}
+              getOptionLabel={(option) => option.title}
+              filterSelectedOptions
               onChange={this.handleTagChange}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  variant="outlined"
+                  label="Tags"
+                  error={errors.tags ? true : false}
+                  helperText={errors.tags}
+                />
+              )}
             />
             <br />
             {errors.general && (
