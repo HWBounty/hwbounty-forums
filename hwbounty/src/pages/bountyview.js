@@ -14,7 +14,6 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import CommentIcon from "@material-ui/icons/Comment";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import LikeButton from "../components/bounty/LikeButton";
 import BountyReward from "../components/bounty/BountyReward";
 import Grid from "@material-ui/core/Grid";
 import Chip from "@material-ui/core/Chip";
@@ -29,6 +28,7 @@ import axios from "axios";
 import expandLabel, { compactLabel } from "../util/expandLabel";
 
 import BountyNotFound from "../components/bounty/BountyNotFound";
+import Comment from "../components/bounty/Comment";
 
 // Redux
 import { submitComment } from "../redux/actions/dataActions";
@@ -132,15 +132,7 @@ export class bountyview extends Component {
   };
 
   handleCommentSubmit = (event) => {
-    event.preventDefault();
     this.props.submitComment(this.state.id, { comment: this.state.comment });
-  };
-
-  handleCommentReplySubmit = (parentID, event) => {
-    this.props.submitComment(this.state.id, {
-      comment: this.state.comment,
-      parentID: parentID,
-    });
   };
 
   render() {
@@ -223,53 +215,7 @@ export class bountyview extends Component {
                 </Card>
               </Grid>
               {this.state.comments.map((c, i) => (
-                <Grid item xs={12}>
-                  <Card
-                    className={
-                      c.parentCommentID != null
-                        ? classes.childComment
-                        : classes.comment
-                    }
-                  >
-                    <CardHeader
-                      avatar={
-                        <Avatar aria-label={c.user.publicID} src={c.user.pfp} />
-                      }
-                      title={"From: " + c.user.publicID}
-                      action={
-                        c.parentCommentID === null ? (
-                          <IconButton className={classes.answerCheck}>
-                            <CheckIcon color="disable" />
-                          </IconButton>
-                        ) : null
-                      }
-                    />
-                    {c.comment}{" "}
-                    {c.edited > 0 ? (
-                      <small style={{ color: "gray" }}>(edited)</small>
-                    ) : null}
-                    {c.parentCommentID != null ? null : (
-                      <span>
-                        {" "}
-                        <br />
-                        <CardActions disableSpacing>
-                          <TextField
-                            name="reply"
-                            type="reply"
-                            label="Reply"
-                            className={classes.textField}
-                            variant="outlined"
-                            size="small"
-                            fullWidth
-                          />
-                          <IconButton>
-                            <SendIcon color="primary" />
-                          </IconButton>
-                        </CardActions>
-                      </span>
-                    )}
-                  </Card>
-                </Grid>
+                <Comment comment={c} />
               ))}
             </Grid>
           </span>
