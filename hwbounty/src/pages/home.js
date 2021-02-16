@@ -54,8 +54,8 @@ export class home extends Component {
     let recentBountiesMarkup = !loading ? (
       bounties.map((bounty) => <Bounty key={bounty.bountyID} bounty={bounty} />)
     ) : (
-      <BountySkeleton />
-    );
+        <BountySkeleton />
+      );
     return (
       <div className={classes.rootPadding}>
         <Grid container spacing={7}>
@@ -65,7 +65,7 @@ export class home extends Component {
           <Grid item sm={8} xs={12}>
             {recentBountiesMarkup}
           </Grid>
-          
+
           {/*<Grid item sm={4} xs={12}>
             <Profile />
     </Grid>*/}
@@ -77,7 +77,6 @@ export class home extends Component {
 
 home.propTypes = {
   getBounties: PropTypes.func.isRequired,
-  getFakeBounties: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,
 };
 

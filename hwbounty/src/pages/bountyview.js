@@ -87,41 +87,41 @@ export class bountyview extends Component {
     axios
       .get(
         "/bounty/" +
-          this.props.location.pathname.substring(
-            this.props.location.pathname.lastIndexOf("/") + 1
-          )
+        this.props.location.pathname.substring(
+          this.props.location.pathname.lastIndexOf("/") + 1
+        )
       )
       .then((res_obj) => {
         res_obj.data
           ? this.setState({
-              ...this.state,
-              id: res_obj.data.bountyID,
-              title: res_obj.data.title,
-              text: res_obj.data.description,
-              posterName: res_obj.data.author.publicID,
-              posterIcon: res_obj.data.author.pfp,
-              points: res_obj.data.points,
-              claimed: false,
-              labels: res_obj.data.tags.split(",").map((l, e) => {
-                return expandLabel(l);
-              }),
-            })
+            ...this.state,
+            id: res_obj.data.bountyID,
+            title: res_obj.data.title,
+            text: res_obj.data.description,
+            posterName: res_obj.data.author.publicID,
+            posterIcon: res_obj.data.author.pfp,
+            points: res_obj.data.points,
+            claimed: false,
+            labels: res_obj.data.tags.split(",").map((l, e) => {
+              return expandLabel(l);
+            }),
+          })
           : this.setState({ valid: false });
       });
 
     axios
       .get(
         "/comments/" +
-          this.props.location.pathname.substring(
-            this.props.location.pathname.lastIndexOf("/") + 1
-          )
+        this.props.location.pathname.substring(
+          this.props.location.pathname.lastIndexOf("/") + 1
+        )
       )
       .then((res_obj) => {
         res_obj.data
           ? this.setState({
-              ...this.state,
-              comments: res_obj.data,
-            })
+            ...this.state,
+            comments: res_obj.data,
+          })
           : this.setState({ valid: false });
         console.log(res_obj);
       });
@@ -132,6 +132,7 @@ export class bountyview extends Component {
   };
 
   handleCommentSubmit = (event) => {
+    event.preventDefault();
     this.props.submitComment(this.state.id, { comment: this.state.comment });
   };
 
@@ -220,8 +221,8 @@ export class bountyview extends Component {
             </Grid>
           </span>
         ) : (
-          <BountyNotFound />
-        )}
+            <BountyNotFound />
+          )}
       </div>
     );
   }
