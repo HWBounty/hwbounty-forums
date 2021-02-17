@@ -50,7 +50,7 @@ class Comment extends Component {
   constructor() {
     super();
     this.state = {
-      comment: "", // what the user is writing now
+      reply: "", // what the user is writing now
     };
   }
 
@@ -60,14 +60,13 @@ class Comment extends Component {
 
   handleCommentReplySubmit = (event) => {
     event.preventDefault();
-    this.props.submitComment(this.state.id, { comment: this.state.comment, parentID: this.props.comment.commentID});
+    this.props.submitComment(this.state.id, { comment: this.state.reply, parentID: this.props.comment.commentID });
     console.log(this.props.comment.commentID)
   };
 
   render() {
     const { classes, comment } = this.props;
-
-    return(
+    return (
       <Grid item xs={12}>
         <Card
           className={
@@ -84,7 +83,7 @@ class Comment extends Component {
             action={
               comment.parentCommentID === null ? (
                 <IconButton className={classes.answerCheck}>
-                  <CheckIcon color="disable" />
+                  <CheckIcon color="disabled" />
                 </IconButton>
               ) : null
             }

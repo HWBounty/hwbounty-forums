@@ -9,10 +9,8 @@ export class BountyNotFound extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <p>
-            <h1> Invalid bounty </h1> <br />
-            Maybe it was deleted or there was a typo.
-          </p>
+          <h1> Invalid bounty </h1> <br />
+          <p>Maybe it was deleted or there was a typo. </p>
           <a className="App-link" href="/">
             <Button variant="outlined">Return to home</Button>
           </a>

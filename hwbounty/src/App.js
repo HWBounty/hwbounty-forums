@@ -61,7 +61,7 @@ class App extends Component {
                 <Route path="/login" component={Login} />
                 <Route path="/signup" component={Signup} />
                 <Route path="/postbounty" component={PostBounty} />
-                <Route path="/bountyview/*" component={BountyView} />
+                <Route path="/bountyview/:bountyID" component={BountyView} />
                 <Route path="/contactus" component={ContactUs} />
                 <Route path="/vsuccess" component={null} />
                 <Route path="/doath*" component={null} />

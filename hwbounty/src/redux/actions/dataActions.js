@@ -33,10 +33,10 @@ export const getBounties = (filter) => (dispatch) => {
     });
 };
 
-export const getBounty = (bountyId) => (dispatch) => {
+export const getBounty = (bountyID) => (dispatch) => {
   dispatch({ type: LOADING_UI });
   axios
-    .get(`/bounty/${bountyId}`)
+    .get(`/bounty/${bountyID}`)
     .then((res) => {
       dispatch({
         type: SET_BOUNTY,

@@ -14,24 +14,23 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import CommentIcon from "@material-ui/icons/Comment";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import BountyReward from "../components/bounty/BountyReward";
 import Grid from "@material-ui/core/Grid";
 import Chip from "@material-ui/core/Chip";
 import SendIcon from "@material-ui/icons/Send";
 import TextField from "@material-ui/core/TextField";
 import CheckIcon from "@material-ui/icons/Check";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
-// Requests
-import axios from "axios";
-
-// Expanding labels
+// Utils
 import expandLabel, { compactLabel } from "../util/expandLabel";
 
+// Components
 import BountyNotFound from "../components/bounty/BountyNotFound";
+import BountyReward from "../components/bounty/BountyReward";
 import Comment from "../components/bounty/Comment";
 
 // Redux
-import { submitComment } from "../redux/actions/dataActions";
+import { submitComment, getBounty } from "../redux/actions/dataActions";
 import { connect } from "react-redux";
 
 const styles = (theme) => ({
@@ -62,69 +61,22 @@ const styles = (theme) => ({
     paddingLeft: 10,
     paddingBottom: 5,
   },
+  loading: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+  }
 });
 
 export class bountyview extends Component {
-  constructor() {
-    super();
-    this.state = {
-      points: 0,
-      claimed: false,
-      id: 0,
-      posterIcon: "",
-      posterName: "",
-      labels: [],
-      title: "",
-      text: "​",
-      comments: [],
-      valid: true,
-      bounties: null,
-      comment: "", // what the user is writing now
-    };
+  state = {
+    valid: true,
+    comment: "", // what the user is writing now
   }
 
   componentDidMount = () => {
-    axios
-      .get(
-        "/bounty/" +
-        this.props.location.pathname.substring(
-          this.props.location.pathname.lastIndexOf("/") + 1
-        )
-      )
-      .then((res_obj) => {
-        res_obj.data
-          ? this.setState({
-            ...this.state,
-            id: res_obj.data.bountyID,
-            title: res_obj.data.title,
-            text: res_obj.data.description,
-            posterName: res_obj.data.author.publicID,
-            posterIcon: res_obj.data.author.pfp,
-            points: res_obj.data.points,
-            claimed: false,
-            labels: res_obj.data.tags.split(",").map((l, e) => {
-              return expandLabel(l);
-            }),
-          })
-          : this.setState({ valid: false });
-      });
-
-    axios
-      .get(
-        "/comments/" +
-        this.props.location.pathname.substring(
-          this.props.location.pathname.lastIndexOf("/") + 1
-        )
-      )
-      .then((res_obj) => {
-        res_obj.data
-          ? this.setState({
-            ...this.state,
-            comments: res_obj.data,
-          })
-          : this.setState({ valid: false });
-        console.log(res_obj);
-      });
+    const bountyID = this.props.match.params.bountyID;
+    this.props.getBounty(bountyID);
   };
 
   handleCommentChanged = (event) => {
@@ -133,15 +85,38 @@ export class bountyview extends Component {
 
   handleCommentSubmit = (event) => {
     event.preventDefault();
-    this.props.submitComment(this.state.id, { comment: this.state.comment });
+    this.props.submitComment(this.props.data.bounty.bountyID, { comment: this.state.comment });
   };
 
   render() {
-    const { classes } = this.props;
-    const { valid } = this.state;
+    const { classes, data: { bounty }, UI: { loading } } = this.props;
+
+    let tags = (bounty.tags && (
+      <span>
+        <span>Topics:</span> <br />
+        {bounty.tags.split(",").map((l, i) => {
+          return (
+            <Chip
+              label={l[0]}
+              //style={l[1]}
+              component="a"
+              href={"/?t=" + compactLabel(l[0])}
+              clickable
+              key={l}
+            />
+          );
+        })}{" "}
+        <br /> <br />
+      </span>
+    ))
+
+    let comments = (bounty.comments && bounty.comments.map((c, i) => (
+      <Comment comment={c} key={c.commentID} />
+    )))
+
     return (
       <div className={classes.rootPadding}>
-        {valid ? (
+        {loading ? (<CircularProgress size={200} thickness={2} className={classes.loading} />) : (bounty.valid ? (
           <span>
             <Grid container className={classes.root} spacing={2}>
               <Grid item xs={12}>
@@ -149,40 +124,24 @@ export class bountyview extends Component {
                   <CardHeader
                     avatar={
                       <Avatar
-                        aria-label={this.state.posterName}
-                        src={this.state.posterIcon}
+                        aria-label={bounty.author.publicID}
+                        src={bounty.author.pfp}
                       />
                     }
-                    title={this.state.title}
-                    subheader={"Posted by: " + this.state.posterName}
+                    title={bounty.title}
+                    subheader={"Posted by: " + bounty.author.publicID}
                   />
                   <CardContent>
-                    {this.state.labels.length > 0 ? (
-                      <span>
-                        <span>Topics:</span> <br />
-                        {this.state.labels.map((l, i) => {
-                          return (
-                            <Chip
-                              label={l[0]}
-                              style={l[1]}
-                              component="a"
-                              href={"/?t=" + compactLabel(l[0])}
-                              clickable
-                            />
-                          );
-                        })}{" "}
-                        <br /> <br />
-                      </span>
-                    ) : null}
+                    {tags}
 
                     <Typography
                       variant="body2"
                       color="textSecondary"
                       component="p"
                     >
-                      {this.state.text.split("\n").map((l, i) => {
+                      {bounty.description && bounty.description.split("\n").map((l, i) => {
                         return (
-                          <span id={i}>
+                          <span id={i} key={i}>
                             {l}
                             <br />
                           </span>
@@ -190,8 +149,8 @@ export class bountyview extends Component {
                       })}
                     </Typography>
                     <BountyReward
-                      pointReward={this.state.points}
-                      claimed={this.state.claimed}
+                      pointReward={bounty.points}
+                      claimed={bounty.claimed}
                     />
                   </CardContent>{" "}
                   <br /> <br />
@@ -215,21 +174,28 @@ export class bountyview extends Component {
                   </form>
                 </Card>
               </Grid>
-              {this.state.comments.map((c, i) => (
-                <Comment comment={c} />
-              ))}
+              {comments}
             </Grid>
           </span>
         ) : (
-            <BountyNotFound />
-          )}
+            <BountyNotFound />))}
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => ({});
+bountyview.propTypes = {
+  data: PropTypes.object.isRequired,
+  UI: PropTypes.object.isRequired,
+  submitComment: PropTypes.func.isRequired,
+  getBounty: PropTypes.func.isRequired,
+}
 
-export default connect(mapStateToProps, { submitComment })(
+const mapStateToProps = (state) => ({
+  data: state.data,
+  UI: state.UI
+});
+
+export default connect(mapStateToProps, { submitComment, getBounty })(
   withStyles(styles)(bountyview)
 );

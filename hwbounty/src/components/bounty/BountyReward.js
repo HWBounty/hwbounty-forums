@@ -20,12 +20,12 @@ export class BountyReward extends Component {
     const bountyReward = claimed ? (
       [claimed]
     ) : (
-      <Typography variant="h6" className={classes.reward}>
-        <span fontWeight={pointReward} m={1}>
-          {pointReward} Points
+        <Typography variant="h6" className={classes.reward}>
+          <span fontWeight={pointReward} m={1}>
+            {pointReward} Points
         </span>
-      </Typography>
-    );
+        </Typography>
+      );
 
     return bountyReward;
   }
@@ -33,7 +33,7 @@ export class BountyReward extends Component {
 
 BountyReward.propTypes = {
   pointReward: PropTypes.number.isRequired,
-  claimed: PropTypes.bool.isRequired,
+  claimed: PropTypes.bool,
 };
 
 export default withStyles(styles)(BountyReward);
