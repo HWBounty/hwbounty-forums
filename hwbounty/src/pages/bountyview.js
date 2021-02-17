@@ -68,6 +68,7 @@ const styles = (theme) => ({
   }
 });
 
+
 export class bountyview extends Component {
   state = {
     valid: true,

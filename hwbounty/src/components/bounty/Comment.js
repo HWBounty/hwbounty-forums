@@ -11,6 +11,8 @@ import Grid from "@material-ui/core/Grid";
 import SendIcon from "@material-ui/icons/Send";
 import TextField from "@material-ui/core/TextField";
 import CheckIcon from "@material-ui/icons/Check";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 
 // Redux
 import { submitComment } from "../../redux/actions/dataActions";
@@ -61,11 +63,12 @@ class Comment extends Component {
   handleCommentReplySubmit = (event) => {
     event.preventDefault();
     this.props.submitComment(this.props.comment.bountyID, { comment: this.state.reply, parentID: this.props.comment.commentID });
-    console.log(this.state.reply)
   };
 
   render() {
+    dayjs.extend(relativeTime);
     const { classes, comment } = this.props;
+    console.log(comment);
     return (
       <Grid item xs={12}>
         <Card
@@ -80,6 +83,7 @@ class Comment extends Component {
               <Avatar aria-label={comment.user.publicID} src={comment.user.pfp} />
             }
             title={"From: " + comment.user.publicID}
+            subheader={dayjs(comment.timestamp).fromNow()}
             action={
               comment.parentCommentID === null ? (
                 <IconButton className={classes.answerCheck}>
