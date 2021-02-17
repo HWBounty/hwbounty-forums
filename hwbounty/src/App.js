@@ -31,6 +31,7 @@ import PageNotFound from "./pages/pagenotfound";
 import PostBounty from "./pages/postbounty";
 import BountyView from "./pages/bountyview";
 import ContactUs from "./pages/contactus";
+import SignupConfirmed from "./pages/signupconfirmed";
 //import doath from "./pages/doath";
 
 import axios from "axios";
@@ -43,7 +44,6 @@ if (token) {
   store.dispatch({ type: SET_AUTHENTICATED });
   axios.defaults.headers.common["Authorization"] = token;
   store.dispatch(getUserData());
-  console.log("authenticated");
 }
 
 class App extends Component {
@@ -61,15 +61,11 @@ class App extends Component {
                 <Route path="/login" component={Login} />
                 <Route path="/signup" component={Signup} />
                 <Route path="/postbounty" component={PostBounty} />
-                <Route path="/bountyview/:bountyID" component={BountyView} />
+                <Route exact path="/bountyview/:bountyID" component={BountyView} />
+                <Route exact path="/signupcallback/:token" component={SignupConfirmed} />
                 <Route path="/contactus" component={ContactUs} />
                 <Route path="/vsuccess" component={null} />
                 <Route path="/doath*" component={null} />
-                <Route
-                  path="/signupcallback/*"
-                  component={() => <Redirect to="/login" />}
-                />{" "}
-                {/*todo login on callback*/}
                 <Route path="*" component={PageNotFound} />
               </Switch>
             </Router>
