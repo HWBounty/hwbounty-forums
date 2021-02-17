@@ -55,7 +55,7 @@ class Comment extends Component {
   }
 
   handleCommentChanged = (event) => {
-    this.setState({ comment: event.target.value });
+    this.setState({ commentData: event.target.value });
   };
 
   handleCommentReplySubmit = (event) => {
