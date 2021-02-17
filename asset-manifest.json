@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.5309a8f0.chunk.css",
-    "main.js": "/static/js/main.7b7282a8.chunk.js",
-    "main.js.map": "/static/js/main.7b7282a8.chunk.js.map",
+    "main.css": "/static/css/main.7f43d898.chunk.css",
+    "main.js": "/static/js/main.54edc3ce.chunk.js",
+    "main.js.map": "/static/js/main.54edc3ce.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.d5806bd4.js",
     "runtime-main.js.map": "/static/js/runtime-main.d5806bd4.js.map",
     "static/js/2.2c5b36c9.chunk.js": "/static/js/2.2c5b36c9.chunk.js",
@@ -10,7 +10,7 @@
     "static/js/3.fd010f1e.chunk.js": "/static/js/3.fd010f1e.chunk.js",
     "static/js/3.fd010f1e.chunk.js.map": "/static/js/3.fd010f1e.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.5309a8f0.chunk.css.map": "/static/css/main.5309a8f0.chunk.css.map",
+    "static/css/main.7f43d898.chunk.css.map": "/static/css/main.7f43d898.chunk.css.map",
     "static/js/2.2c5b36c9.chunk.js.LICENSE.txt": "/static/js/2.2c5b36c9.chunk.js.LICENSE.txt",
     "static/media/HWBounty-Logo.cfcf31be.png": "/static/media/HWBounty-Logo.cfcf31be.png",
     "static/media/favicon.7badd3ea.ico": "/static/media/favicon.7badd3ea.ico",
@@ -19,7 +19,7 @@
   "entrypoints": [
     "static/js/runtime-main.d5806bd4.js",
     "static/js/2.2c5b36c9.chunk.js",
-    "static/css/main.5309a8f0.chunk.css",
-    "static/js/main.7b7282a8.chunk.js"
+    "static/css/main.7f43d898.chunk.css",
+    "static/js/main.54edc3ce.chunk.js"
   ]
 }
