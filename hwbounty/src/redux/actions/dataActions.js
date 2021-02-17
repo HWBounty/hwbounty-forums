@@ -97,6 +97,7 @@ export const unlikeBounty = (bountyId) => (dispatch) => {
 
 // Submit a comment
 export const submitComment = (bountyId, commentData) => (dispatch) => {
+  console.log(bountyId)
   axios
     .post(`/comment/${bountyId}`, commentData)
     .then((res) => {

@@ -97,8 +97,8 @@ export class bountyview extends Component {
         {bounty.tags.split(",").map((l, i) => {
           return (
             <Chip
-              label={l[0]}
-              //style={l[1]}
+              label={expandLabel(l)[0]}
+              style={expandLabel(l)[1]}
               component="a"
               href={"/?t=" + compactLabel(l[0])}
               clickable

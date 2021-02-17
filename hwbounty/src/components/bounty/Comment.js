@@ -55,13 +55,13 @@ class Comment extends Component {
   }
 
   handleCommentChanged = (event) => {
-    this.setState({ commentData: event.target.value });
+    this.setState({ reply: event.target.value });
   };
 
   handleCommentReplySubmit = (event) => {
     event.preventDefault();
-    this.props.submitComment(this.state.id, { comment: this.state.reply, parentID: this.props.comment.commentID });
-    console.log(this.props.comment.commentID)
+    this.props.submitComment(this.props.comment.bountyID, { comment: this.state.reply, parentID: this.props.comment.commentID });
+    console.log(this.state.reply)
   };
 
   render() {
