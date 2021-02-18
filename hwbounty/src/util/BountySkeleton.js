@@ -4,8 +4,10 @@ import PropTypes from "prop-types";
 
 // MUI
 import Card from "@material-ui/core/Card";
-import CardMedia from "@material-ui/core/CardMedia";
+import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
+import Avatar from "@material-ui/core/Avatar";
+import Typography from "@material-ui/core/Typography";
 
 import withStyles from "@material-ui/core/styles/withStyles";
 
@@ -48,15 +50,23 @@ const styles = (theme) => ({
     marginBottom: 10,
     backgroundColor: "rgba(0,0,0,0.6)",
   },
+  avatar: {
+    width: 25,
+    height: 25,
+    marginRight: 10,
+    marginBottom: 5,
+  },
 });
 
 const BountySkeleton = (props) => {
   const { classes } = props;
   const content = Array.from({ length: 5 }).map((item, index) => (
     <Card className={classes.card} key={index}>
-      <CardMedia className={classes.cover} image={NoImg} />
       <CardContent className={classes.cardContent}>
-        <div className={classes.handle} />
+        <div style={{ display: "flex" }}>
+          <Avatar className={classes.avatar} image={NoImg} />
+          <Typography className={classes.handle} />
+        </div>
         <div className={classes.date} />
         <div className={classes.fullLine} />
         <div className={classes.fullLine} />
