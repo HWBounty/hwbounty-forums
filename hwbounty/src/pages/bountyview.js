@@ -125,14 +125,16 @@ export class bountyview extends Component {
         <span>Topics:</span> <br />
         {bounty.tags.split(",").map((l, i) => {
           return (
-            <Chip
-              label={expandLabel(l)[0]}
-              style={expandLabel(l)[1]}
-              component="a"
-              href={"/?t=" + compactLabel(l[0])}
-              clickable
-              key={l}
-            />
+            <span style={{paddingRight: 5}}>
+              <Chip
+                label={expandLabel(l)[0]}
+                style={expandLabel(l)[1]}
+                component="a"
+                href={"/?t=" + compactLabel(l[0])}
+                clickable
+                key={l}
+              />
+            </span>
           );
         })}{" "}
         <br /> <br />

@@ -127,13 +127,15 @@ class Bounty extends Component {
               })
               .map((l, i) => {
                 return (
-                  <Chip
-                    label={l[0]}
-                    style={l[1]}
-                    component="a"
-                    href={"/?t=" + compactLabel(l[0])}
-                    clickable
-                  />
+                  <span style={{paddingRight: 5}}>
+                    <Chip
+                      label={l[0]}
+                      style={l[1]}
+                      component="a"
+                      href={"/?t=" + compactLabel(l[0])}
+                      clickable
+                    />
+                  </span>
                 );
               })}
             <BountyDialog
