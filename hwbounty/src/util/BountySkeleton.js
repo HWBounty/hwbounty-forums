@@ -8,6 +8,7 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
+import Chip from "@material-ui/core/Chip";
 
 import withStyles from "@material-ui/core/styles/withStyles";
 
@@ -27,10 +28,16 @@ const styles = (theme) => ({
     objectFit: "cover",
   },
   handle: {
-    width: 60,
-    height: 18,
+    width: 100,
+    height: 20,
     backgroundColor: theme.palette.primary.main,
     marginBottom: 7,
+  },
+  date: {
+    width: 50,
+    height: 18,
+    backgroundColor: "#757575",
+    marginBottom: 20,
   },
   data: {
     height: 14,
@@ -56,6 +63,9 @@ const styles = (theme) => ({
     marginRight: 10,
     marginBottom: 5,
   },
+  tag: {
+    width: 100,
+  },
 });
 
 const BountySkeleton = (props) => {
@@ -71,6 +81,7 @@ const BountySkeleton = (props) => {
         <div className={classes.fullLine} />
         <div className={classes.fullLine} />
         <div className={classes.halfLine} />
+        <Chip className={classes.tag}/>
       </CardContent>
     </Card>
   ));
