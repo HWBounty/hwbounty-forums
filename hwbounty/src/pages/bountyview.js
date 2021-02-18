@@ -32,6 +32,7 @@ import Comment from "../components/bounty/Comment";
 // Redux
 import { submitComment, getBounty } from "../redux/actions/dataActions";
 import { connect } from "react-redux";
+import { List } from "@material-ui/core";
 
 const styles = (theme) => ({
   ...theme.spreadIt,
@@ -68,6 +69,33 @@ const styles = (theme) => ({
   }
 });
 
+const sortComments = (comments) => {
+  let replySorted = {};
+  let nonReplies = [];
+  for(var i = 0; i < comments.length; i++){
+    if(comments[i].parentCommentID){
+      if(replySorted[comments[i].parentCommentID]) {
+        replySorted[comments[i].parentCommentID].push(comments[i]);
+      } else {
+        replySorted[comments[i].parentCommentID] = [comments[i]];
+      }
+    } else {
+      nonReplies.push(comments[i]);
+    }
+  }
+
+  let final = nonReplies;
+  for(var i = 0; i < nonReplies.length; i++){
+    if(replySorted[nonReplies[i].commentID]) { 
+      final.splice(i + 1, 0, replySorted[nonReplies[i].commentID]);
+    }
+  }
+
+  final = [].concat.apply([], final);
+  console.log(final);
+  return final;
+}
+
 
 export class bountyview extends Component {
   state = {
@@ -91,7 +119,7 @@ export class bountyview extends Component {
 
   render() {
     const { classes, data: { bounty }, UI: { loading } } = this.props;
-
+    
     let tags = (bounty.tags && (
       <span>
         <span>Topics:</span> <br />
@@ -111,7 +139,7 @@ export class bountyview extends Component {
       </span>
     ))
 
-    let comments = (bounty.comments && bounty.comments.map((c, i) => (
+    let comments = (bounty.comments && sortComments(bounty.comments).map((c, i) => (
       <Comment comment={c} key={c.commentID} />
     )))
 
