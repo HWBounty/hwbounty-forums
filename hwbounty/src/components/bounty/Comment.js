@@ -17,6 +17,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 // Redux
 import { submitComment } from "../../redux/actions/dataActions";
 import { connect } from "react-redux";
+import { Typography } from "@material-ui/core";
 
 const styles = (theme) => ({
   ...theme.spreadIt,
@@ -41,10 +42,12 @@ const styles = (theme) => ({
     float: "right",
     paddingLeft: 10,
     paddingBottom: 5,
+    wordBreak: "break-all",
   },
   comment: {
     paddingLeft: 10,
     paddingBottom: 5,
+    wordBreak: "break-all",
   },
 });
 
@@ -68,7 +71,6 @@ class Comment extends Component {
   render() {
     dayjs.extend(relativeTime);
     const { classes, comment } = this.props;
-    console.log(comment);
     return (
       <Grid item xs={12}>
         <Card
@@ -92,10 +94,12 @@ class Comment extends Component {
               ) : null
             }
           />
-          {comment.comment}{" "}
-          {comment.edited > 0 ? (
-            <small style={{ color: "gray" }}>(edited)</small>
-          ) : null}
+          <Typography>
+            {comment.comment}{" "}
+            {comment.edited > 0 ? (
+              <small style={{ color: "gray" }}>(edited)</small>
+            ) : null}
+          </Typography>
           {comment.parentCommentID != null ? null : (
             <span>
               {" "}

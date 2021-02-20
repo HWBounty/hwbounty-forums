@@ -41,6 +41,7 @@ const styles = (theme) => ({
     textAlign: "left",
     float: "left",
     paddingBottom: 1,
+    wordBreak: "break-all",
   },
   textField: {
     margin: "15px auto 15px auto",
