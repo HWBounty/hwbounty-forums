@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/static/css/main.7f43d898.chunk.css",
-    "main.js": "/static/js/main.940cf723.chunk.js",
-    "main.js.map": "/static/js/main.940cf723.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.09d6946f.js",
-    "runtime-main.js.map": "/static/js/runtime-main.09d6946f.js.map",
-    "static/js/2.8bfa2982.chunk.js": "/static/js/2.8bfa2982.chunk.js",
-    "static/js/2.8bfa2982.chunk.js.map": "/static/js/2.8bfa2982.chunk.js.map",
-    "static/js/3.28702f2c.chunk.js": "/static/js/3.28702f2c.chunk.js",
-    "static/js/3.28702f2c.chunk.js.map": "/static/js/3.28702f2c.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.7f43d898.chunk.css.map": "/static/css/main.7f43d898.chunk.css.map",
-    "static/js/2.8bfa2982.chunk.js.LICENSE.txt": "/static/js/2.8bfa2982.chunk.js.LICENSE.txt",
-    "static/media/HWBounty-Logo.cfcf31be.png": "/static/media/HWBounty-Logo.cfcf31be.png",
-    "static/media/favicon.7badd3ea.ico": "/static/media/favicon.7badd3ea.ico",
-    "static/media/no-img.2fda6558.png": "/static/media/no-img.2fda6558.png"
+    "main.css": "/forums/static/css/main.5309a8f0.chunk.css",
+    "main.js": "/forums/static/js/main.f18af87f.chunk.js",
+    "main.js.map": "/forums/static/js/main.f18af87f.chunk.js.map",
+    "runtime-main.js": "/forums/static/js/runtime-main.c88f7738.js",
+    "runtime-main.js.map": "/forums/static/js/runtime-main.c88f7738.js.map",
+    "static/js/2.8bfa2982.chunk.js": "/forums/static/js/2.8bfa2982.chunk.js",
+    "static/js/2.8bfa2982.chunk.js.map": "/forums/static/js/2.8bfa2982.chunk.js.map",
+    "static/js/3.28702f2c.chunk.js": "/forums/static/js/3.28702f2c.chunk.js",
+    "static/js/3.28702f2c.chunk.js.map": "/forums/static/js/3.28702f2c.chunk.js.map",
+    "index.html": "/forums/index.html",
+    "static/css/main.5309a8f0.chunk.css.map": "/forums/static/css/main.5309a8f0.chunk.css.map",
+    "static/js/2.8bfa2982.chunk.js.LICENSE.txt": "/forums/static/js/2.8bfa2982.chunk.js.LICENSE.txt",
+    "static/media/HWBounty-Logo.cfcf31be.png": "/forums/static/media/HWBounty-Logo.cfcf31be.png",
+    "static/media/favicon.7badd3ea.ico": "/forums/static/media/favicon.7badd3ea.ico",
+    "static/media/no-img.2fda6558.png": "/forums/static/media/no-img.2fda6558.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.09d6946f.js",
+    "static/js/runtime-main.c88f7738.js",
     "static/js/2.8bfa2982.chunk.js",
-    "static/css/main.7f43d898.chunk.css",
-    "static/js/main.940cf723.chunk.js"
+    "static/css/main.5309a8f0.chunk.css",
+    "static/js/main.f18af87f.chunk.js"
   ]
 }
