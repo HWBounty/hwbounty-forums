@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/forums/static/css/main.5309a8f0.chunk.css",
-    "main.js": "/forums/static/js/main.f18af87f.chunk.js",
-    "main.js.map": "/forums/static/js/main.f18af87f.chunk.js.map",
-    "runtime-main.js": "/forums/static/js/runtime-main.c88f7738.js",
-    "runtime-main.js.map": "/forums/static/js/runtime-main.c88f7738.js.map",
-    "static/js/2.8bfa2982.chunk.js": "/forums/static/js/2.8bfa2982.chunk.js",
-    "static/js/2.8bfa2982.chunk.js.map": "/forums/static/js/2.8bfa2982.chunk.js.map",
-    "static/js/3.28702f2c.chunk.js": "/forums/static/js/3.28702f2c.chunk.js",
-    "static/js/3.28702f2c.chunk.js.map": "/forums/static/js/3.28702f2c.chunk.js.map",
-    "index.html": "/forums/index.html",
-    "static/css/main.5309a8f0.chunk.css.map": "/forums/static/css/main.5309a8f0.chunk.css.map",
-    "static/js/2.8bfa2982.chunk.js.LICENSE.txt": "/forums/static/js/2.8bfa2982.chunk.js.LICENSE.txt",
-    "static/media/HWBounty-Logo.cfcf31be.png": "/forums/static/media/HWBounty-Logo.cfcf31be.png",
-    "static/media/favicon.7badd3ea.ico": "/forums/static/media/favicon.7badd3ea.ico",
-    "static/media/no-img.2fda6558.png": "/forums/static/media/no-img.2fda6558.png"
+    "main.css": "/hwbounty-forums/static/css/main.5309a8f0.chunk.css",
+    "main.js": "/hwbounty-forums/static/js/main.24814834.chunk.js",
+    "main.js.map": "/hwbounty-forums/static/js/main.24814834.chunk.js.map",
+    "runtime-main.js": "/hwbounty-forums/static/js/runtime-main.a5f2732e.js",
+    "runtime-main.js.map": "/hwbounty-forums/static/js/runtime-main.a5f2732e.js.map",
+    "static/js/2.23c6aba7.chunk.js": "/hwbounty-forums/static/js/2.23c6aba7.chunk.js",
+    "static/js/2.23c6aba7.chunk.js.map": "/hwbounty-forums/static/js/2.23c6aba7.chunk.js.map",
+    "static/js/3.3c96220f.chunk.js": "/hwbounty-forums/static/js/3.3c96220f.chunk.js",
+    "static/js/3.3c96220f.chunk.js.map": "/hwbounty-forums/static/js/3.3c96220f.chunk.js.map",
+    "index.html": "/hwbounty-forums/index.html",
+    "static/css/main.5309a8f0.chunk.css.map": "/hwbounty-forums/static/css/main.5309a8f0.chunk.css.map",
+    "static/js/2.23c6aba7.chunk.js.LICENSE.txt": "/hwbounty-forums/static/js/2.23c6aba7.chunk.js.LICENSE.txt",
+    "static/media/HWBounty-Logo.cfcf31be.png": "/hwbounty-forums/static/media/HWBounty-Logo.cfcf31be.png",
+    "static/media/favicon.7badd3ea.ico": "/hwbounty-forums/static/media/favicon.7badd3ea.ico",
+    "static/media/no-img.2fda6558.png": "/hwbounty-forums/static/media/no-img.2fda6558.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.c88f7738.js",
-    "static/js/2.8bfa2982.chunk.js",
+    "static/js/runtime-main.a5f2732e.js",
+    "static/js/2.23c6aba7.chunk.js",
     "static/css/main.5309a8f0.chunk.css",
-    "static/js/main.f18af87f.chunk.js"
+    "static/js/main.24814834.chunk.js"
   ]
 }
