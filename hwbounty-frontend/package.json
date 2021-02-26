@@ -1,6 +1,6 @@
 {
   "homepage": "https://hwbounty.github.io/",
-  "name": "hwbounty-forums",
+  "name": "hwbounty-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -24,7 +24,7 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "echo forums.hwbounty.help > build/CNAME && gh-pages -d build",
+    "deploy": "echo hwbounty.help > build/CNAME && gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
