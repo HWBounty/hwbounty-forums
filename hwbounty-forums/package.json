@@ -1,6 +1,6 @@
 {
-  "homepage": "http://hwbounty.github.io/forums",
-  "name": "hwbounty",
+  "homepage": "https://hwbounty.github.io/",
+  "name": "hwbounty-forums",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
