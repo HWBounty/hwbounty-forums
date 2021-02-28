@@ -20,24 +20,17 @@ import { MuiThemeProvider } from "@material-ui/core/styles";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import themeFile from "./util/theme";
 
+// Subdomains
+import { Home, Forums } from "./pages/subdomains";
+
 // Components
 import Navbar from "./components/layout/Navbar";
-
-// Pages
-import Home from "./pages/home";
-import Login from "./pages/login";
-import Signup from "./pages/signup";
-import PageNotFound from "./pages/pagenotfound";
-import PostBounty from "./pages/postbounty";
-import BountyView from "./pages/bountyview";
-import ContactUs from "./pages/contactus";
-import SignupConfirmed from "./pages/signupconfirmed";
-//import doath from "./pages/doath";
 
 import axios from "axios";
 
 const theme = createMuiTheme(themeFile);
 
+// Configure login/api
 axios.defaults.baseURL = "https://api.hwbounty.help";
 const token = localStorage.DBIdToken;
 if (token) {
@@ -45,6 +38,21 @@ if (token) {
   axios.defaults.headers.common["Authorization"] = token;
   store.dispatch(getUserData());
 }
+
+// Configure subdomain
+let host = window.location.host;
+let protocal = window.location.protocol;
+let parts = host.split(".");
+let subdomain = "";
+
+if (parts.length >= 3) {
+  subdomain = parts[0];
+  parts.splice(0, 1);
+  //window.location = protocal + "//" + parts.join(".") + "/" + subdomain;
+}
+
+let isHome = subdomain == "";
+let isForums = subdomain == "forums";
 
 class App extends Component {
   render() {
@@ -56,18 +64,8 @@ class App extends Component {
               <div>
                 <Navbar />
               </div>
-              <Switch>
-                <Route exact path="/" component={Home} />
-                <Route path="/login" component={Login} />
-                <Route path="/signup" component={Signup} />
-                <Route path="/postbounty" component={PostBounty} />
-                <Route exact path="/bountyview/:bountyID" component={BountyView} />
-                <Route exact path="/signupcallback/:token" component={SignupConfirmed} />
-                <Route path="/contactus" component={ContactUs} />
-                <Route path="/vsuccess" component={null} />
-                <Route path="/doath*" component={null} />
-                <Route path="*" component={PageNotFound} />
-              </Switch>
+              {isHome && <Route exact path="/" component={Home} />}
+              {isForums && <Route component={Forums} />}
             </Router>
           </Provider>
         </MuiThemeProvider>

@@ -1,7 +1,7 @@
 // React
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
-import AppIcon from "../images/favicon.ico";
+import AppIcon from "../../images/favicon.ico";
 import { Link } from "react-router-dom";
 
 //MUI Stuff
@@ -22,7 +22,7 @@ import axios from "axios";
 
 // Redux
 import { connect } from "react-redux";
-import { signupUser } from "../redux/actions/userActions";
+import { signupUser } from "../../redux/actions/userActions";
 
 const styles = (theme) => ({
   ...theme.spreadIt,

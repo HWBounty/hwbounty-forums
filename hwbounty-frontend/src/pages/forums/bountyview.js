@@ -1,7 +1,7 @@
 // React
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
-import AppIcon from "../images/favicon.ico";
+import AppIcon from "../../images/favicon.ico";
 
 //MUI Stuff
 import { withStyles } from "@material-ui/core/styles";
@@ -22,15 +22,15 @@ import CheckIcon from "@material-ui/icons/Check";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 // Utils
-import expandLabel, { compactLabel } from "../util/expandLabel";
+import expandLabel, { compactLabel } from "../../util/expandLabel";
 
 // Components
-import BountyNotFound from "../components/bounty/BountyNotFound";
-import BountyReward from "../components/bounty/BountyReward";
-import Comment from "../components/bounty/Comment";
+import BountyNotFound from "../../components/bounty/BountyNotFound";
+import BountyReward from "../../components/bounty/BountyReward";
+import Comment from "../../components/bounty/Comment";
 
 // Redux
-import { submitComment, getBounty } from "../redux/actions/dataActions";
+import { submitComment, getBounty } from "../../redux/actions/dataActions";
 import { connect } from "react-redux";
 import { List } from "@material-ui/core";
 
@@ -67,15 +67,15 @@ const styles = (theme) => ({
     position: "absolute",
     top: "50%",
     left: "50%",
-  }
+  },
 });
 
 const sortComments = (comments) => {
   let replySorted = {};
   let nonReplies = [];
-  for(var i = 0; i < comments.length; i++){
-    if(comments[i].parentCommentID){
-      if(replySorted[comments[i].parentCommentID]) {
+  for (var i = 0; i < comments.length; i++) {
+    if (comments[i].parentCommentID) {
+      if (replySorted[comments[i].parentCommentID]) {
         replySorted[comments[i].parentCommentID].push(comments[i]);
       } else {
         replySorted[comments[i].parentCommentID] = [comments[i]];
@@ -86,8 +86,8 @@ const sortComments = (comments) => {
   }
 
   let final = nonReplies;
-  for(var i = 0; i < nonReplies.length; i++){
-    if(replySorted[nonReplies[i].commentID]) { 
+  for (var i = 0; i < nonReplies.length; i++) {
+    if (replySorted[nonReplies[i].commentID]) {
       final.splice(i + 1, 0, replySorted[nonReplies[i].commentID]);
     }
   }
@@ -95,14 +95,13 @@ const sortComments = (comments) => {
   final = [].concat.apply([], final);
   console.log(final);
   return final;
-}
-
+};
 
 export class bountyview extends Component {
   state = {
     valid: true,
     comment: "", // what the user is writing now
-  }
+  };
 
   componentDidMount = () => {
     const bountyID = this.props.match.params.bountyID;
@@ -115,18 +114,24 @@ export class bountyview extends Component {
 
   handleCommentSubmit = (event) => {
     event.preventDefault();
-    this.props.submitComment(this.props.data.bounty.bountyID, { comment: this.state.comment });
+    this.props.submitComment(this.props.data.bounty.bountyID, {
+      comment: this.state.comment,
+    });
   };
 
   render() {
-    const { classes, data: { bounty }, UI: { loading } } = this.props;
-    
-    let tags = (bounty.tags && (
+    const {
+      classes,
+      data: { bounty },
+      UI: { loading },
+    } = this.props;
+
+    let tags = bounty.tags && (
       <span>
         <span>Topics:</span> <br />
         {bounty.tags.split(",").map((l, i) => {
           return (
-            <span style={{paddingRight: 5}}>
+            <span style={{ paddingRight: 5 }}>
               <Chip
                 label={expandLabel(l)[0]}
                 style={expandLabel(l)[1]}
@@ -140,15 +145,23 @@ export class bountyview extends Component {
         })}{" "}
         <br /> <br />
       </span>
-    ))
+    );
 
-    let comments = (bounty.comments && sortComments(bounty.comments).map((c, i) => (
-      <Comment comment={c} key={c.commentID} />
-    )))
+    let comments =
+      bounty.comments &&
+      sortComments(bounty.comments).map((c, i) => (
+        <Comment comment={c} key={c.commentID} />
+      ));
 
     return (
       <div className={classes.rootPadding}>
-        {loading ? (<CircularProgress size={200} thickness={2} className={classes.loading} />) : (bounty.valid ? (
+        {loading ? (
+          <CircularProgress
+            size={200}
+            thickness={2}
+            className={classes.loading}
+          />
+        ) : bounty.valid ? (
           <span>
             <Grid container className={classes.root} spacing={2}>
               <Grid item xs={12}>
@@ -171,14 +184,15 @@ export class bountyview extends Component {
                       color="textSecondary"
                       component="p"
                     >
-                      {bounty.description && bounty.description.split("\n").map((l, i) => {
-                        return (
-                          <span id={i} key={i}>
-                            {l}
-                            <br />
-                          </span>
-                        );
-                      })}
+                      {bounty.description &&
+                        bounty.description.split("\n").map((l, i) => {
+                          return (
+                            <span id={i} key={i}>
+                              {l}
+                              <br />
+                            </span>
+                          );
+                        })}
                     </Typography>
                     <BountyReward
                       pointReward={bounty.points}
@@ -210,7 +224,8 @@ export class bountyview extends Component {
             </Grid>
           </span>
         ) : (
-            <BountyNotFound />))}
+          <BountyNotFound />
+        )}
       </div>
     );
   }
@@ -221,11 +236,11 @@ bountyview.propTypes = {
   UI: PropTypes.object.isRequired,
   submitComment: PropTypes.func.isRequired,
   getBounty: PropTypes.func.isRequired,
-}
+};
 
 const mapStateToProps = (state) => ({
   data: state.data,
-  UI: state.UI
+  UI: state.UI,
 });
 
 export default connect(mapStateToProps, { submitComment, getBounty })(

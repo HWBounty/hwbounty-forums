@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import PropTypes from "prop-types";
-import AppIcon from "../images/favicon.ico";
+import AppIcon from "../../images/favicon.ico";
 import { Link } from "react-router-dom";
 
 //MUI Stuff
@@ -14,7 +14,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 
 // Redux stuff
 import { connect } from "react-redux";
-import { loginUser } from "../redux/actions/userActions";
+import { loginUser } from "../../redux/actions/userActions";
 
 const styles = (theme) => ({
   ...theme.spreadIt,

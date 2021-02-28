@@ -3,20 +3,20 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 // Components
-import Bounty from "../components/bounty/Bounty";
+import Bounty from "../../components/bounty/Bounty";
+import BountyFilter from "../../components/layout/BountyFilter";
+import BountySkeleton from "../../util/BountySkeleton";
 //import Profile from "../components/profile/Profile";
-import BountyFilter from "../components/layout/BountyFilter";
-import BountySkeleton from "../util/BountySkeleton";
 
 // MUI
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
-import theme from "../util/theme";
+import theme from "../../util/theme";
 
 // Redux
 import { connect } from "react-redux";
-import { getBounties } from "../redux/actions/dataActions";
+import { getBounties } from "../../redux/actions/dataActions";
 import { Link } from "react-router-dom";
 
 const styles = {
@@ -34,7 +34,7 @@ function getQueryVariable(variable, querystring) {
   }
 }
 
-export class home extends Component {
+export class forumshome extends Component {
   state = {
     bounties: null,
   };
@@ -54,8 +54,8 @@ export class home extends Component {
     let recentBountiesMarkup = !loading ? (
       bounties.map((bounty) => <Bounty key={bounty.bountyID} bounty={bounty} />)
     ) : (
-        <BountySkeleton />
-      );
+      <BountySkeleton />
+    );
     return (
       <div className={classes.rootPadding}>
         <Grid container spacing={7}>
@@ -75,7 +75,7 @@ export class home extends Component {
   }
 }
 
-home.propTypes = {
+forumshome.propTypes = {
   getBounties: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,
 };
@@ -85,5 +85,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { getBounties })(
-  withStyles(styles)(home)
+  withStyles(styles)(forumshome)
 );
