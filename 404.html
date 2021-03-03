@@ -23,9 +23,6 @@
       // https://username.github.io/repo-name/?/one/two&a=b~and~c=d#qwe
       // Otherwise, leave pathSegmentsToKeep as 0.
       var pathSegmentsToKeep = 0;
-      var subdomain =  window.location.host.split('.')[1] ? window.location.host.split('.')[0] : false;
-
-      if(subdomain) return;
 
       var l = window.location;
       l.replace(
