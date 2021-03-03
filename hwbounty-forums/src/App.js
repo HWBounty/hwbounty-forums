@@ -57,24 +57,27 @@ class App extends Component {
               <div>
                 <Navbar />
               </div>
-              <Route path="/" component={ForumHome} />
-              <Route path="/login" component={Login} />
-              <Route path="/signup" component={Signup} />{" "}
-              <Route path="/postbounty" component={PostBounty} />
-              <Route
-                exact
-                path="/bountyview/:bountyID"
-                component={BountyView}
-              />
-              <Route path="/contactus" component={ContactUs} />
-              <Route
-                exact
-                path="/signupcallback/:token"
-                component={SignupConfirmed}
-              />{" "}
-              <Route path="/vsuccess" component={null} />
-              <Route path="/doath?code=:code" component={null} />
-              <Route path="*" component={PageNotFound} />
+              <div></div>
+              <Switch>
+                <Route exact path="/" component={ForumHome} />
+                <Route path="/login" component={Login} />
+                <Route path="/signup" component={Signup} />{" "}
+                <Route path="/postbounty" component={PostBounty} />
+                <Route
+                  exact
+                  path="/bountyview/:bountyID"
+                  component={BountyView}
+                />
+                <Route path="/contactus" component={ContactUs} />
+                <Route
+                  exact
+                  path="/signupcallback/:token"
+                  component={SignupConfirmed}
+                />
+                <Route path="/vsuccess" component={null} />
+                <Route path="/doath?code=:code" component={null} />
+                <Route path="*" component={PageNotFound} />
+              </Switch>
             </Router>
           </Provider>
         </MuiThemeProvider>
